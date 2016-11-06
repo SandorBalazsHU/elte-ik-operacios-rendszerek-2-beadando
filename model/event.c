@@ -2,6 +2,7 @@
     Tárgy: Elte IK Operációs rendszerek 1. Beadandó
     Készítette: Sándor Balázs - AZA6NL
     Leadás: 2016.11.07
+	Git: https://github.com/SandorBalazsHU/elte-ik-os-1
 
     Az eseményeket reprezentáló adatszerkezetethez tartozó fügvények.
 */
@@ -10,8 +11,8 @@
 #include <stdlib.h>
 //strcpy-hez
 #include <string.h>
-#include "event.h"
-#include "visitor.h"
+#include "Event.h"
+#include "Visitor.h"
 
 //Új üres esemény
 struct Event* newEvent(int id, char* name)
