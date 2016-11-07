@@ -10,44 +10,44 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
-#include <time.h>
+    #include <time.h>
 
-//A látogatókat modellező adatszerkezet
-/*
-+--------------------------------+
-|             Visitor            |
-|     +--------------------+     |
-|     | int id             |     |
-|     +--------------------+     |
-|     +--------------------+     |
-|     | char* name         |     |
-|     +--------------------+     |
-|     +--------------------+     |
-|     | char* mail         |     |
-|     +--------------------+     |
-|     +--------------------+     |
-|     | time_t date        |     |
-|     +--------------------+     |
-|                                |
-+--------------------------------+ 
-*/
+    //A látogatókat modellező adatszerkezet
+    /*
+    +--------------------------------+
+    |             Visitor            |
+    |     +--------------------+     |
+    |     | int id             |     |
+    |     +--------------------+     |
+    |     +--------------------+     |
+    |     | char* name         |     |
+    |     +--------------------+     |
+    |     +--------------------+     |
+    |     | char* mail         |     |
+    |     +--------------------+     |
+    |     +--------------------+     |
+    |     | time_t date        |     |
+    |     +--------------------+     |
+    |                                |
+    +--------------------------------+ 
+    */
 
-typedef struct Visitor
-{
-    //A látogató sorszáma
-    int id;
-    //A látogató neve
-    char name[100];
-    //A látogató e-mail címe
-    char email[100];
-    //Regisztáció időpontja
-    time_t date;
-}Visitor;
+    typedef struct Visitor
+    {
+        //A látogató sorszáma
+        int id;
+        //A látogató neve
+        char name[100];
+        //A látogató e-mail címe
+        char email[100];
+        //Regisztáció időpontja
+        time_t date;
+    }Visitor;
 
-//Új látogató létrehozása
-struct Visitor* newVisitor(int, char*, char*, time_t);
+    //Új látogató létrehozása
+    struct Visitor* newVisitor(int, char*, char*, time_t);
 
-//A Visitor típus destruktora
-void freeVisitor(Visitor*);
+    //A Visitor típus destruktora
+    void freeVisitor(Visitor*);
 
 #endif

@@ -14,5 +14,8 @@ int main(int argc, char** argv)
     clearScrean();
     printIntro();
     printMainMenu();
+
+    test();
+
     return 0;
 }

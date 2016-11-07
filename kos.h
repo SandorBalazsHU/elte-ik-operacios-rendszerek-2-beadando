@@ -22,3 +22,6 @@ Ez tárolja a látogatókat is.*/
 
 //A fájlműveletekért felelős függvények gyűjteménye
 #include "./controller/File.h"
+
+//A tesztfüggvények gyűjteménye
+#include "./tests/Tests.h"
