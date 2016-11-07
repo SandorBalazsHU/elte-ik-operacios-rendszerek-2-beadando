@@ -51,11 +51,11 @@ int addVisitorToEvent(Event* event, Visitor* visitor)
 
 		/*Felszabadítjuk a címeket tároló tömböt,
 		de az elemeket nem. Azok címeit az új tömb már tárolja.*/
-		Visitor** arr = lines -> eventArray;
+		Visitor** arr = event->eventArray;
 		free(arr);
 
 		//A helyérekerül az új nagyobb tömb címe.
-		lines -> eventArray = _eventArray;
+		event->eventArray = _eventArray;
 		
 		//Elvégezzük a beszúrást
 		event->eventArray[event->size] = visitor;
@@ -74,7 +74,7 @@ int deleteVisitorFromEvent(Event* event, Visitor* visitor);
 	{
 		if(event->eventArray[i] != visitor)
 		{
-			_eventArray[l] = lines->eventArray[i];
+			_eventArray[l] = event->eventArray[i];
 		}
 		else
 		{
@@ -92,7 +92,8 @@ int deleteVisitorFromEvent(Event* event, Visitor* visitor);
 
 
 //Index szerinti keresés a látogatók között
-struct Visitor* getVisitorFromEventById(Event* event, int id){
+struct Visitor* getVisitorFromEventById(Event* event, int id)
+{
 	return event->eventArray[id];
 }
 
@@ -104,7 +105,7 @@ void freeEvent(Event* event)
 	int i;
 	for(i = 0; i < event->size; ++i)
 	{
-		freeVisitor(event->lineArray[i]);
+		freeVisitor(event->eventArray[i]);
 	}
 	free(event->eventArray);
 	free(event);

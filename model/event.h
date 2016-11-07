@@ -50,11 +50,11 @@ typedef struct Event
     int id;
     //A rendezvény neve
     char name[100];
-	//Felvett uticélok száma
+	//Felvett látogatók száma
 	int size;
 	//A tároló tömb valós mérete
 	int _realSize;
-	//Járatokra mutató pointerek tömbje
+	//Az látogatkra mutató pointerek tömbje
 	Visitor** eventArray;
 }Event;
 
