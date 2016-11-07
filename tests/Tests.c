@@ -7,6 +7,8 @@
     A látogatókat reprezentáló adatszerkezetethez tartozó fügvények.
 */
 
+#include <string.h>
+#include <stdio.h>
 #include "./Tests.h"
 #include "./view/ConsoleIO.h"
 #include "./model/Events.h"
@@ -36,7 +38,8 @@ int test()
 //A visitor adatszerkezet tesztje.
 int testVisitor()
 {
-
+    Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+    freeVisitor(visitor1);
 }
 
 //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
