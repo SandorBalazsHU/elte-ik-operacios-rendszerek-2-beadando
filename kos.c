@@ -11,11 +11,14 @@
 
 int main(int argc, char** argv)
 {
+    if(test(argc, argv))
+    {
+        return 0;
+    }
+
     clearScrean();
     printIntro();
     printMainMenu();
-
-    test();
-
+    
     return 0;
 }

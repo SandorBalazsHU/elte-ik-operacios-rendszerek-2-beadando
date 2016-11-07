@@ -17,70 +17,139 @@
 #include "./controller/File.h"
 
 //A teszteket egyszerre futtató függvény.
-int test()
+int test(int argc, char** argv)
 {
-    //A visitor adatszerkezet tesztje.
-    int testVisitor();
+    if(argc > 1)
+    {
+        if(strcmp(argv[1], testConsoleParameter))
+        {
+            //A visitor adatszerkezet tesztje.
+            int testVisitor();
 
-    //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
-    int testEvent();
+            //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
+            int testEvent();
 
-    //Az Event adatszerkezet tesztje több mint 5 elemre.
-    int testEventMax();
+            //Az Event adatszerkezet tesztje több mint 5 elemre.
+            int testEventMax();
 
-    //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
-    int testEvents();
+            //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
+            int testEvents();
 
-    //Az Events adatszerkezet tesztje több mint 5 elemre.
-    int testEventsMax();
+            //Az Events adatszerkezet tesztje több mint 5 elemre.
+            int testEventsMax();
+
+            return 1;
+        }
+    }
+    return 0;
 }
 
 //A visitor adatszerkezet tesztje.
 int testVisitor()
 {
+    printf("\n testVisitor \n");
+
     Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+    printf("     newVisitor - OK\n");
+
     freeVisitor(visitor1);
+    printf("     freeVisitor - OK\n");
 }
 
 //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
 int testEvent()
 {
+    printf("\n testEvent \n");
+
     Event* event1 = newEvent(0,"event1");
+    printf("newEvent - OK\n");
+
         Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+        printf("     newVisitor1 - OK\n");
+
         addVisitorToEvent(event1, visitor1);
+        printf("     addVisitorToEvent1 - OK\n");
+
         Visitor* visitor2 = newVisitor(1, "visitor2", "visitor2@mail.org", getDate());
+        printf("     newVisitor2 - OK\n");
+
         addVisitorToEvent(event1, visitor2);
+        printf("     addVisitorToEvent2 - OK\n");
+
         Visitor* visitor3 = newVisitor(2, "visitor3", "visitor3@mail.org", getDate());
+        printf("     newVisitor3 - OK\n");
+
         addVisitorToEvent(event1, visitor3);
+        printf("     addVisitorToEvent3 - OK\n");
+
     freeEvent(event1);
+    printf("     freeEvent - OK\n");
 }
 
 //Az Event adatszerkezet tesztje több mint 5 elemre.
 int testEventMax()
 {
+    printf("\n testEventMax \n");
+
     Event* event1 = newEvent(0,"event1");
+    printf("     newEvent1 - OK\n");
+
         Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+        printf("          newVisitor1 - OK\n");
+
         addVisitorToEvent(event1, visitor1);
+        printf("               addVisitorToEvent1 - OK\n");
+
         Visitor* visitor2 = newVisitor(1, "visitor2", "visitor2@mail.org", getDate());
+        printf("          newVisitor2 - OK\n");
+
         addVisitorToEvent(event1, visitor2);
+        printf("               addVisitorToEvent2 - OK\n");
+
         Visitor* visitor3 = newVisitor(2, "visitor3", "visitor3@mail.org", getDate());
+        printf("          newVisitor3 - OK\n");
+
         addVisitorToEvent(event1, visitor3);
+        printf("               addVisitorToEvent3 - OK\n");
+
         Visitor* visitor4 = newVisitor(3, "visitor4", "visitor4@mail.org", getDate());
+        printf("          newVisitor4 - OK\n");
+
         addVisitorToEvent(event1, visitor4);
+        printf("               addVisitorToEvent4 - OK\n");
+
         Visitor* visitor5 = newVisitor(4, "visitor5", "visitor5@mail.org", getDate());
+        printf("          newVisitor5 - OK\n");
+
         addVisitorToEvent(event1, visitor5);
+        printf("               addVisitorToEvent5 - OK\n");
+
         Visitor* visitor6 = newVisitor(5, "visitor6", "visitor6@mail.org", getDate());
+        printf("          newVisitor6 - OK\n");
+
         addVisitorToEvent(event1, visitor6);
+        printf("               addVisitorToEvent6 - OK\n");
+
         Visitor* visitor7 = newVisitor(6, "visitor7", "visitor7@mail.org", getDate());
+        printf("          newVisitor7 - OK\n");
+
         addVisitorToEvent(event1, visitor7);
+        printf("               addVisitorToEvent7 - OK\n");
+
         Visitor* visitor8 = newVisitor(7, "visitor8", "visitor8@mail.org", getDate());
+        printf("          newVisitor8 - OK\n");
+
         addVisitorToEvent(event1, visitor8);
+        printf("               addVisitorToEvent8 - OK\n");
+
     freeEvent(event1);
+    printf("     freeEvent - OK\n");
 }
 
 //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
 int testEvents()
 {
+    printf("\n testEvents \n");
     Events* events1 = newEvents();
         Event* event1 = newEvent(0,"event1");
             Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
@@ -113,7 +182,7 @@ int testEvents()
 //Az Events adatszerkezet tesztje több mint 5 elemre.
 int testEventsMax()
 {
-        Events* events1 = newEvents();
+    Events* events1 = newEvents();
         Event* event1 = newEvent(0,"event1");
             Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
             addVisitorToEvent(event1, visitor1);
@@ -176,4 +245,5 @@ int testEventsMax()
             Visitor* visitor21 = newVisitor(20, "visitor21", "visitor21@mail.org", getDate());
             addVisitorToEvent(event6, visitor21);
         addEventToEvents(events1, event7);
+    freeEvents(events1);
 }

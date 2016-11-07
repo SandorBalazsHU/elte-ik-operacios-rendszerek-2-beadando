@@ -25,3 +25,4 @@ Ez tárolja a látogatókat is.*/
 
 //A tesztfüggvények gyűjteménye
 #include "./tests/Tests.h"
+

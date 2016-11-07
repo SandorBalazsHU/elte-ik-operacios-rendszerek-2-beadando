@@ -10,8 +10,12 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
-    //A teszteket egyszerre futtató függvény.
-    int test();
+    //A tesztfuttatás parancssori kapcsolója
+    const char* testConsoleParameter = "-t";
+
+    /*A teszteket egyszerre futtató függvény.
+    1-et ad vissza, ha megkapta a megfeleő parancsssori kapcsolót és 0-t ha nem.*/
+    int test(int, char**);
 
     //A visitor adatszerkezet tesztje.
     int testVisitor();
