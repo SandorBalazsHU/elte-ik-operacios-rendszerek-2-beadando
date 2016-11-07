@@ -20,16 +20,10 @@
     //A visitor adatszerkezet tesztje.
     int testVisitor();
 
-    //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
-    int testEvent();
+    //Az Event adatszerkezet tesztje.
+    int testEvent(int);
 
-    //Az Event adatszerkezet tesztje több mint 5 elemre.
-    int testEventMax();
-
-    //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
-    int testEvents();
-
-    //Az Events adatszerkezet tesztje több mint 5 elemre.
-    int testEventsMax();
+    //Az Events adatszerkezet tesztje.
+    int testEvents(int, int);
 
 #endif
