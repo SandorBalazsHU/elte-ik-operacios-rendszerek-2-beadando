@@ -53,13 +53,29 @@ int testEvent()
         Visitor* visitor3 = newVisitor(2, "visitor3", "visitor3@mail.org", getDate());
         addVisitorToEvent(event1, visitor3);
     freeEvent(event1);
-
 }
 
 //Az Event adatszerkezet tesztje több mint 5 elemre.
 int testEventMax()
 {
-
+    Event* event1 = newEvent(1,"event1");
+        Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+        addVisitorToEvent(event1, visitor1);
+        Visitor* visitor2 = newVisitor(1, "visitor2", "visitor2@mail.org", getDate());
+        addVisitorToEvent(event1, visitor2);
+        Visitor* visitor3 = newVisitor(2, "visitor3", "visitor3@mail.org", getDate());
+        addVisitorToEvent(event1, visitor3);
+        Visitor* visitor4 = newVisitor(3, "visitor4", "visitor4@mail.org", getDate());
+        addVisitorToEvent(event1, visitor4);
+        Visitor* visitor5 = newVisitor(4, "visitor5", "visitor5@mail.org", getDate());
+        addVisitorToEvent(event1, visitor5);
+        Visitor* visitor6 = newVisitor(5, "visitor6", "visitor6@mail.org", getDate());
+        addVisitorToEvent(event1, visitor6);
+        Visitor* visitor7 = newVisitor(6, "visitor7", "visitor7@mail.org", getDate());
+        addVisitorToEvent(event1, visitor7);
+        Visitor* visitor8 = newVisitor(7, "visitor8", "visitor8@mail.org", getDate());
+        addVisitorToEvent(event1, visitor8);
+    freeEvent(event1);
 }
 
 //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
