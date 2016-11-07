@@ -61,7 +61,7 @@
     //Az alapértelmezett tároló tömb mérete
     static const int defaultArraySize = 5;
 
-    //Új üres járatlista létrehozásához
+    //Új esemény létrehozásához
     struct Event* newEvent(int, char*);
 
     //Látogató hozzáadását teszi lehetőve az eseményhez

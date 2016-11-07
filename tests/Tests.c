@@ -45,6 +45,14 @@ int testVisitor()
 //Az Event adatszerkezet tesztje kevesebb mint 5 elemre.
 int testEvent()
 {
+    Event* event1 = newEvent(1,"event1");
+        Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+        addVisitorToEvent(event1, visitor1);
+        Visitor* visitor2 = newVisitor(1, "visitor2", "visitor2@mail.org", getDate());
+        addVisitorToEvent(event1, visitor2);
+        Visitor* visitor3 = newVisitor(2, "visitor3", "visitor3@mail.org", getDate());
+        addVisitorToEvent(event1, visitor3);
+    freeEvent(event1);
 
 }
 
