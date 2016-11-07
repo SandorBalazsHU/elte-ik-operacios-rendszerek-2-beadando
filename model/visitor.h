@@ -10,7 +10,6 @@
 #ifndef VISITOR_H
 #define VISITOR_H
 
-#include <stdio.h>
 #include <time.h>
 
 //A látogatókat modellező adatszerkezet
