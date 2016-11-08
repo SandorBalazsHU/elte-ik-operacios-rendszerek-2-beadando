@@ -11,7 +11,7 @@
 #define EVENT_H
 
     #include <stdio.h>
-    #include "Visitor.h"
+    #include "./Visitor.h"
 
     //A eseményt modellező adatszerkezet
     /*
@@ -55,7 +55,7 @@
         //A tároló tömb valós mérete
         int _realSize;
         //Az látogatkra mutató pointerek tömbje
-        Visitor** eventArray;
+        Visitor** visitorArray;
     }Event;
 
     //Az alapértelmezett tároló tömb mérete

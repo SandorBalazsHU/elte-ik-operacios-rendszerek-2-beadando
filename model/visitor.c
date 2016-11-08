@@ -7,13 +7,20 @@
     A látogatókat reprezentáló adatszerkezetethez tartozó fügvények.
 */
 
+//mallochoz szügséges
+#include <stdlib.h>
+//strcpy-hez
+#include <string.h>
+#include <time.h>
+#include "Visitor.h"
+
 //Új látogató létrehozása
 struct Visitor* newVisitor(int id, char* name, char* mail, time_t date)
 {
     struct Visitor* _this = malloc(sizeof(struct Visitor));
-    this->id=id;
+    _this->id=id;
     strcpy(_this->name, name);
-    strcpy(_this->mail, mail);
+    strcpy(_this->email, mail);
     _this->date=date;
     return _this;
 }

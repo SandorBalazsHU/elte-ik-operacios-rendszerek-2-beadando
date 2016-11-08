@@ -27,15 +27,15 @@
     | | Event** eventArray | |===========>|    eventArray[]    |
     | +--------------------+ |            | +----------------+ |              +----------------+
     +------------------------+            | |     Event*     | | ===========> |     Event      |
-                                        | +----------------+ |              +----------------+
-                                        | +----------------+ |              +----------------+
-                                        | |     Event*     | | ===========> |     Event      |
-                                        | +----------------+ |              +----------------+
-                                        | +----------------+ |              +----------------+
-                                        | |     Event*     | | ===========> |     Event      |
-                                        | +----------------+ |              +----------------+
-                                        |         ...        |                      ...
-                                        +--------------------+
+                                          | +----------------+ |              +----------------+
+                                          | +----------------+ |              +----------------+
+                                          | |     Event*     | | ===========> |     Event      |
+                                          | +----------------+ |              +----------------+
+                                          | +----------------+ |              +----------------+
+                                          | |     Event*     | | ===========> |     Event      |
+                                          | +----------------+ |              +----------------+
+                                          |         ...        |                      ...
+                                          +--------------------+
     */
 
     typedef struct Events
@@ -49,10 +49,10 @@
     }Events;
 
     //Az alapértelmezett tároló tömb mérete
-    static const int defaultArraySize = 5;
+    static const int defaultEventArraySize = 5;
 
     //Új üres eseménytároló létrehozásához
-    struct Event* newEvents();
+    struct Events* newEvents();
 
     //Esemény hozzáadását teszi lehetőve az eseménytárolóhoz
     /*	Ha a tömb betelt, akkor dupla méretűt deklarálunk, átmásoljuk az adatokat

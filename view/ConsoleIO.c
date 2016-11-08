@@ -9,12 +9,12 @@
 #include <time.h>
 #include <string.h>
 #include <stdio.h>
-#include "ConsoleIO.h"
-
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <ctype.h>
+
+#include "ConsoleIO.h"
 
 //Képernyő töröl
 void clearScrean()

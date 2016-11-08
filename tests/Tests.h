@@ -7,11 +7,11 @@
     A látogatókat reprezentáló adatszerkezetet tartalmazó fejléc.
 */
 
-#ifndef VISITOR_H
-#define VISITOR_H
+#ifndef TESTS_H
+#define TESTS_H
 
-    //A tesztfuttatás parancssori kapcsolója
-    const char* testConsoleParameter = "-t";
+    //A tesztfuttatás parancssori kapcsolójaz
+    static const char* testConsoleParameter = "-t";
 
     /*A teszteket egyszerre futtató függvény.
     1-et ad vissza, ha megkapta a megfeleő parancsssori kapcsolót és 0-t ha nem.*/

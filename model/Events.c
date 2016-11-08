@@ -15,11 +15,11 @@
 #include "Event.h"
 
 //Új üres eseménytároló létrehozásához
-struct Event* newEvents(int id, char* name)
+struct Events* newEvents(int id, char* name)
 {
 	struct Events* _this = malloc(sizeof(struct Events));
 	_this->size = 0;
-	_this->_realSize = defaultArraySize;
+	_this->_realSize = defaultEventArraySize;
 	Event**  _eventsArray = malloc(_this->_realSize * sizeof(Event*));
 	_this->eventsArray = _eventsArray;
 	return _this;
@@ -53,7 +53,7 @@ int addEventToEvents(Events* events, Event* event)
 		free(arr);
 
 		//A helyérekerül az új nagyobb tömb címe.
-		Events->eventsArray = _eventsArray;
+		events->eventsArray = _eventsArray;
 		
 		//Elvégezzük a beszúrást
 		events->eventsArray[events->size] = event;
@@ -77,7 +77,7 @@ int deleteEventFromEvents(Events* events, Event* event)
 		else
 		{
 			l = i-1;
-			freeVisitor(events->eventsArray[i]);
+			freeEvent(events->eventsArray[i]);
 		}
 		++l;
 	}

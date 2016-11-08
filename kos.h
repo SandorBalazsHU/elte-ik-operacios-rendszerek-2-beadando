@@ -7,6 +7,9 @@
     Egy egységes API-t biztosít. Így csak ezt az egy fejlécet kell használni.
 */
 
+#ifndef KOS_H
+#define KOS_H
+
 //A konzolkezelő függvények gyűjteménye
 #include "./view/ConsoleIO.h"
 
@@ -26,3 +29,4 @@ Ez tárolja a látogatókat is.*/
 //A tesztfüggvények gyűjteménye
 #include "./tests/Tests.h"
 
+#endif

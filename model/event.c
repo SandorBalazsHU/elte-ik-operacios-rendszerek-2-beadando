@@ -22,8 +22,8 @@ struct Event* newEvent(int id, char* name)
 	strcpy(_this->name, name);
 	_this->size = 0;
 	_this->_realSize = defaultArraySize;
-	Visitor**  _eventArray = malloc(_this->_realSize * sizeof(Visitor*));
-	_this->eventArray = _eventArray;
+	Visitor**  _visitorArray = malloc(_this->_realSize * sizeof(Visitor*));
+	_this->visitorArray = _visitorArray;
 	return _this;
 }
 
@@ -37,28 +37,28 @@ int addVisitorToEvent(Event* event, Visitor* visitor)
 	
 	if(event->_realSize > event->size)
 	{
-		event->eventArray[event->size] = visitor;
+		event->visitorArray[event->size] = visitor;
 		event->size++;
 	}
 	else
 	{
 		event->_realSize *= 2;
-		Visitor**  _eventArray = malloc(event->_realSize * sizeof(Visitor*));
+		Visitor**  _visitorArray = malloc(event->_realSize * sizeof(Visitor*));
 		for(i = 0; i < event->size; ++i)
 		{
-			_eventArray[i] = event->eventArray[i];
+			_visitorArray[i] = event->visitorArray[i];
 		}
 
 		/*Felszabadítjuk a címeket tároló tömböt,
 		de az elemeket nem. Azok címeit az új tömb már tárolja.*/
-		Visitor** arr = event->eventArray;
+		Visitor** arr = event->visitorArray;
 		free(arr);
 
 		//A helyérekerül az új nagyobb tömb címe.
-		event->eventArray = _eventArray;
+		event->visitorArray = _visitorArray;
 		
 		//Elvégezzük a beszúrást
-		event->eventArray[event->size] = visitor;
+		event->visitorArray[event->size] = visitor;
 		event->size++;
 	}
 	return 0;
@@ -66,26 +66,26 @@ int addVisitorToEvent(Event* event, Visitor* visitor)
 
 
 //Látogató törlése az eseményről
-int deleteVisitorFromEvent(Event* event, Visitor* visitor);
+int deleteVisitorFromEvent(Event* event, Visitor* visitor)
 {
 	int i, l = 0;
-	Visitor**  _eventArray = malloc(event -> _realSize * sizeof(Visitor*));
+	Visitor**  _visitorArray = malloc(event -> _realSize * sizeof(Visitor*));
 	for(i = 0; i < event->size; ++i)
 	{
-		if(event->eventArray[i] != visitor)
+		if(event->visitorArray[i] != visitor)
 		{
-			_eventArray[l] = event->eventArray[i];
+			_visitorArray[l] = event->visitorArray[i];
 		}
 		else
 		{
 			l = i-1;
-			freeVisitor(event->eventArray[i]);
+			freeVisitor(event->visitorArray[i]);
 		}
 		++l;
 	}
-	Visitor** arr = event -> eventArray;
+	Visitor** arr = event -> visitorArray;
 	free(arr);
-	event -> eventArray = _eventArray;
+	event -> visitorArray = _visitorArray;
 	event->size--;
 	return 0;
 }
@@ -94,19 +94,19 @@ int deleteVisitorFromEvent(Event* event, Visitor* visitor);
 //Index szerinti keresés a látogatók között
 struct Visitor* getVisitorFromEventById(Event* event, int id)
 {
-	return event->eventArray[id];
+	return event->visitorArray[id];
 }
 
 /*Az Event típus destruktora
-Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában
+Kell destrukfor, mivel az visitorArray külön álló egységet képez a memóriában
 Törli a tömb által mutatott elemeket is!*/
 void freeEvent(Event* event)
 {
 	int i;
 	for(i = 0; i < event->size; ++i)
 	{
-		freeVisitor(event->eventArray[i]);
+		freeVisitor(event->visitorArray[i]);
 	}
-	free(event->eventArray);
+	free(event->visitorArray);
 	free(event);
 }
