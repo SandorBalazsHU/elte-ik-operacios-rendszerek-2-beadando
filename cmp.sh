@@ -1,3 +1,3 @@
  #!/bin/bash
 clear
-gcc ./kos.c  view/* model/* controller/* -O3 -o kos
+gcc -O3 ./kos.c  view/* model/* controller/* tests/* -O3 -o kos

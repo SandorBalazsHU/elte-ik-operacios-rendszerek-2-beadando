@@ -11,8 +11,8 @@
 #include <stdlib.h>
 //strcpy-hez
 #include <string.h>
-#include "Event.h"
-#include "Visitor.h"
+#include "./Event.h"
+#include "./Visitor.h"
 
 //Új üres esemény
 struct Event* newEvent(int id, char* name)

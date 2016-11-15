@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include "ConsoleIO.h"
+#include "./ConsoleIO.h"
 
 //Képernyő töröl
 void clearScrean()

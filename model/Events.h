@@ -11,7 +11,7 @@
 #define EVENTS_H
 
     #include <stdio.h>
-    #include "Event.h"
+    #include "./Event.h"
 
     //A eseményt modellező adatszerkezet
     /*

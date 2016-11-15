@@ -11,8 +11,8 @@
 #include <stdlib.h>
 //strcpy-hez
 //#include <string.h>
-#include "Events.h"
-#include "Event.h"
+#include "./Events.h"
+#include "./Event.h"
 
 //Új üres eseménytároló létrehozásához
 struct Events* newEvents(int id, char* name)

@@ -7,7 +7,7 @@
     A program belépési pntja.
 */
 
-#include "Kos.h"
+#include "./Kos.h"
 
 int main(int argc, char** argv)
 {

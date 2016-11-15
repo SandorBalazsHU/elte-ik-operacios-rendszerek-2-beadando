@@ -12,7 +12,7 @@
 //strcpy-hez
 #include <string.h>
 #include <time.h>
-#include "Visitor.h"
+#include "./Visitor.h"
 
 //Új látogató létrehozása
 struct Visitor* newVisitor(int id, char* name, char* mail, time_t date)
