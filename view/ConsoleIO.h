@@ -29,4 +29,10 @@
     //A főmeü kirajzolása
     void printMainMenu();
 
+    /*A menük logikája
+      Tetszőleges menü geráltatható vele.
+      Meg kell adni egy karaktertömböt amiben egy karakter egy heles
+      választási lehetőséget jelent a menüben.*/
+    char menuGenerator(char*);
+
 #endif

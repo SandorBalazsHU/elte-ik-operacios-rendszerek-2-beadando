@@ -6,7 +6,7 @@
 
     A program belépési pntja.
 */
-
+#include <stdio.h>
 #include "./Kos.h"
 
 int main(int argc, char** argv)
@@ -19,6 +19,8 @@ int main(int argc, char** argv)
     clearScrean();
     printIntro();
     printMainMenu();
+    char selectedMainMenuitem = menuGenerator("123");
+    printf(" - Selected: %c \n", selectedMainMenuitem);
     
     return 0;
 }

@@ -65,7 +65,7 @@ void printIntro()
 void printMainMenu()
 {
 	printf("          +-------------------+ \n");
-	printf("      \x1b[32m1.)\x1b[0m | Jelentkezés! | \n");
+	printf("      \x1b[32m1.)\x1b[0m | Jelentkezés!      | \n");
 	printf("          +-------------------+ \n");
 	printf("          +-------------------+ \n");
 	printf("      \x1b[32m2.)\x1b[0m | Adminisztráció    | \n");
@@ -76,14 +76,35 @@ void printMainMenu()
 	printf("      \x1b[32m+\x1b[0m Valassz funkciot: ");
 }
 
-//A menük logika
-char mainMenu()
+/*A menük logikája
+  Tetszőleges menü geráltatható vele.
+  Meg kell adni egy karaktertömböt amiben egy karakter egy heles
+  választási lehetőséget jelent a menüben.*/
+char menuGenerator(char* menuPoints)
 {
-	char selectedMenuPoint = ' ';
-	while( !((selectedMenuPoint == '1') || (selectedMenuPoint == '2') || (selectedMenuPoint == '3')) )
+	char selectedMenuPoint = '~';
+	short int state = 0;
+	short int isCorrect = 0;
+	int i;
+	while( isCorrect == 0 )
 	{
-		if ((selectedMenuPoint != ' ') && ( selectedMenuPoint != '\n')) printf("      \x1b[32m+\x1b[0m Hibas ertek! Add meg újra: ");
+		if ((selectedMenuPoint != '~') && ( selectedMenuPoint != '\n') && ( state == 0))
+		{
+			printf("      \x1b[32m+\x1b[0m Hibás érték! Add meg újra: ");
+			state++;
+		}
 		selectedMenuPoint = getchar();
+
+		if(selectedMenuPoint == '\n') state = 0;
+
+		for(i = 0; i < strlen(menuPoints); ++i)
+		{
+			if(menuPoints[i] == selectedMenuPoint)
+			{
+				isCorrect = 1;
+				break;
+			}
+		}
 	}
 	return selectedMenuPoint;
 }
