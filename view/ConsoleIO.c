@@ -61,18 +61,16 @@ void printIntro()
 	printf("%s\x1b[32m +---------------------------------------------------------+\x1b[0m\n",spacer);
 }
 
-//A főmeü kirajzolása
-void printMainMenu()
+//A menü kirajzolása
+void printMenu(char** menuItems, int menuItemsNumber)
 {
-	printf("          +-------------------+ \n");
-	printf("      \x1b[32m1.)\x1b[0m | Jelentkezés!      | \n");
-	printf("          +-------------------+ \n");
-	printf("          +-------------------+ \n");
-	printf("      \x1b[32m2.)\x1b[0m | Adminisztráció    | \n");
-	printf("          +-------------------+ \n");
-	printf("          +-------------------+ \n");
-	printf("      \x1b[32m3.)\x1b[0m | Kilépés           | \n");
-	printf("          +-------------------+ \n");
+	int i;
+	for(i = 0; i < menuItemsNumber; ++i)
+	{
+	printf("          +--------------------+ \n");
+	printf("      \x1b[32m%i.)\x1b[0m |%s| \n", (i+1), menuItems[i]);
+	printf("          +--------------------+ \n");
+	}
 	printf("      \x1b[32m+\x1b[0m Valassz funkciot: ");
 }
 
@@ -80,31 +78,31 @@ void printMainMenu()
   Tetszőleges menü geráltatható vele.
   Meg kell adni egy karaktertömböt amiben egy karakter egy heles
   választási lehetőséget jelent a menüben.*/
-char menuGenerator(char* menuPoints)
+char menuGenerator(char* menuItems)
 {
-	char selectedMenuPoint = '~';
+	char selectedMenuItem = '~';
 	short int state = 0;
 	short int isCorrect = 0;
 	int i;
 	while( isCorrect == 0 )
 	{
-		if ((selectedMenuPoint != '~') && ( selectedMenuPoint != '\n') && ( state == 0))
+		if ((selectedMenuItem != '~') && ( selectedMenuItem != '\n') && ( state == 0))
 		{
 			printf("      \x1b[32m+\x1b[0m Hibás érték! Add meg újra: ");
 			state++;
 		}
-		selectedMenuPoint = getchar();
+		selectedMenuItem = getchar();
 
-		if(selectedMenuPoint == '\n') state = 0;
+		if(selectedMenuItem == '\n') state = 0;
 
-		for(i = 0; i < strlen(menuPoints); ++i)
+		for(i = 0; i < strlen(menuItems); ++i)
 		{
-			if(menuPoints[i] == selectedMenuPoint)
+			if(menuItems[i] == selectedMenuItem)
 			{
 				isCorrect = 1;
 				break;
 			}
 		}
 	}
-	return selectedMenuPoint;
+	return selectedMenuItem;
 }

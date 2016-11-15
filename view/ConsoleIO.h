@@ -26,8 +26,8 @@
     //Kiírja a köszöntő szöveget
     void printIntro();
 
-    //A főmeü kirajzolása
-    void printMainMenu();
+    //A menü kirajzolása
+    void printMenu(char**, int);
 
     /*A menük logikája
       Tetszőleges menü geráltatható vele.

@@ -18,7 +18,13 @@ int main(int argc, char** argv)
 
     clearScrean();
     printIntro();
-    printMainMenu();
+
+    char* mainMenu[3];
+    mainMenu[0] = "Jelentkezés         ";
+    mainMenu[1] = "Adminisztráció      ";
+    mainMenu[2] = "Kilépés             ";
+    printMenu(mainMenu, 3);
+
     char selectedMainMenuitem = menuGenerator("123");
     printf(" - Selected: %c \n", selectedMainMenuitem);
     
