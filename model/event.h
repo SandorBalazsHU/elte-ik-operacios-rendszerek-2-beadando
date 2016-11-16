@@ -75,6 +75,9 @@
     //Index szerinti keresés a látogatók között
     struct Visitor* getVisitorFromEventById(Event*, int);
 
+    //Visszaadja a látogatók számát.
+    int getVisitorsNumberFromEvent(Event*);
+
     /*Az Event típus destruktora
     Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában
     Törli a tömb által mutatott elemeket is!*/

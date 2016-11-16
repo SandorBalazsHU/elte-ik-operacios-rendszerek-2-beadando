@@ -15,6 +15,8 @@
 #include <ctype.h>
 
 #include "./ConsoleIO.h"
+#include "../model/Event.h"
+#include "../model/Events.h"
 
 //Képernyő töröl
 void clearScrean()
@@ -105,4 +107,14 @@ char menuGenerator(char* menuItems)
 		}
 	}
 	return selectedMenuItem;
+}
+
+void printEvents(Events* events)
+{
+	int i;
+	for(i=0; i<getEventNumberFromEvents(events); ++i)
+	{
+		Event* tmpEvent = getEventFromEventsById(events, i);
+		 printf("");
+	}
 }

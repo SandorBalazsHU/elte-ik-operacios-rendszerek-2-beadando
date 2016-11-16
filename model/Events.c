@@ -95,6 +95,12 @@ struct Event* getEventFromEventsById(Events* events, int id)
 	return events->eventsArray[id];
 }
 
+//Visszaadja a tárolt események számát.
+int getEventNumberFromEvents(Events* events)
+{
+	events->size;
+}
+
 /*Az Events típus destruktora
 Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában
 Törli a tömb által mutatott elemeket is!*/

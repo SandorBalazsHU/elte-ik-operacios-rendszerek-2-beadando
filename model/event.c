@@ -97,6 +97,12 @@ struct Visitor* getVisitorFromEventById(Event* event, int id)
 	return event->visitorArray[id];
 }
 
+//Visszaadja a látogatók számát.
+int getVisitorsNumberFromEvent(Event* event)
+{
+	return event->size;
+}
+
 /*Az Event típus destruktora
 Kell destrukfor, mivel az visitorArray külön álló egységet képez a memóriában
 Törli a tömb által mutatott elemeket is!*/

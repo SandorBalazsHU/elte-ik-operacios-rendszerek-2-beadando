@@ -13,6 +13,8 @@
     //A tesztfuttatás parancssori kapcsolójaz
     static const char* testConsoleParameter = "-t";
 
+//Adatszerkezetek tesztjei
+
     /*A teszteket egyszerre futtató függvény.
     1-et ad vissza, ha megkapta a megfeleő parancsssori kapcsolót és 0-t ha nem.*/
     int test(int, char**);
@@ -25,5 +27,10 @@
 
     //Az Events adatszerkezet tesztje.
     int testEvents(int, int);
+
+//UI tesztek
+
+    //A konzol színezését teszteli
+    int consoleColorsTest();
 
 #endif

@@ -23,6 +23,9 @@ int test(int argc, char** argv)
     {
         if(strcmp(argv[1], testConsoleParameter) == 0)
         {
+            //A konzol színezését teszteli
+            consoleColorsTest();
+
             //A visitor adatszerkezet tesztje.
             testVisitor();
 
@@ -70,6 +73,15 @@ int testEvent(int n)
             addVisitorToEvent(event1, visitor);
             printf("          + addVisitorToEvent %i - \x1b[32mOK\x1b[0m\n", (i+1));
         }
+    int getVisitorsNumberFromEventTestValue = getVisitorsNumberFromEvent(event1);
+    if(getVisitorsNumberFromEventTestValue == n)
+    {
+        printf("     - getVisitorsNumberFromEvent= %i == %i - \x1b[32mOK\x1b[0m\n", getVisitorsNumberFromEventTestValue, n);
+    }
+    else
+    {
+        printf("     - getVisitorsNumberFromEvent= %i =/= %i - %sFALSE%s\n", getVisitorsNumberFromEventTestValue, n, FontRed, ColorClear);
+    }
     freeEvent(event1);
     printf("     - freeEvent - \x1b[32mOK\x1b[0m\n");
 }
@@ -101,4 +113,25 @@ int testEvents(int n, int m)
 
     freeEvents(events);
     printf("     + freeEvents - \x1b[32mOK\x1b[0m \n");
+}
+
+int consoleColorsTest()
+{
+    printf("\n+ consoleColorsTest");
+    printf("\n|      %s%sFontBlack%s",   FontBackWhite, FontBlack, ColorClear);
+    printf("\n|      %sFontRed%s",       FontRed,       ColorClear);
+    printf("\n|      %sFontGreen%s",     FontGreen,     ColorClear);
+    printf("\n|      %sFontYellow%s",    FontYellow,    ColorClear);
+    printf("\n|      %sFontPurple%s",    FontPurple,    ColorClear);
+    printf("\n|      %sFontCyan%s",      FontCyan,      ColorClear);
+    printf("\n|      %sFontWhite%s",     FontWhite,     ColorClear);
+    printf("\n+ consoleColorsTest");
+    printf("\n|      %sFontBackBlack%s", FontBackBlack, ColorClear);
+    printf("\n|      %sFontBackRed%s",   FontBackRed,   ColorClear);
+    printf("\n|      %sFontBackGreen%s", FontBackGreen, ColorClear);
+    printf("\n|      %sFontBackYellow%s",FontBackYellow,ColorClear);
+    printf("\n|      %sFontBackBlue%s",  FontBackBlue,  ColorClear);
+    printf("\n|      %sFontBackPurple%s",FontBackPurple,ColorClear);
+    printf("\n|      %sFontBackCyan%s",  FontBackCyan,  ColorClear);
+    printf("\n|      %s%sFontBackWhite%s", FontBlack,     FontBackWhite, ColorClear);
 }
