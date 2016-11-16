@@ -53,10 +53,10 @@ int testVisitor()
     printf("\n testVisitor \n");
 
     Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
-    printf("     newVisitor - \x1b[32mOK\x1b[0m\n");
+    printf("     newVisitor - %sOK%s\n", FontGreen, ColorClear);
 
     freeVisitor(visitor1);
-    printf("     freeVisitor - \x1b[32mOK\x1b[0m\n");
+    printf("     freeVisitor - %sOK%s\n", FontGreen, ColorClear);
 }
 
 //Az Event adatszerkezet tesztje.
@@ -64,26 +64,26 @@ int testEvent(int n)
 {
     printf("\n+ testEvent - %i\n", n);
     Event* event1 = newEvent(0,"event1");
-    printf("     + newEvent - \x1b[32mOK\x1b[0m\n");
+    printf("     + newEvent - %sOK%s\n", FontGreen, ColorClear);
     int i;
         for(i = 0; i < n; ++i)
         {
             Visitor* visitor = newVisitor(i, "visitor", "visitor@mail.org", getDate());
-            printf("          + newVisitor %i - \x1b[32mOK\x1b[0m\n", (i+1));
+            printf("          + newVisitor %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
             addVisitorToEvent(event1, visitor);
-            printf("          + addVisitorToEvent %i - \x1b[32mOK\x1b[0m\n", (i+1));
+            printf("          + addVisitorToEvent %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
         }
     int getVisitorsNumberFromEventTestValue = getVisitorsNumberFromEvent(event1);
     if(getVisitorsNumberFromEventTestValue == n)
     {
-        printf("     - getVisitorsNumberFromEvent= %i == %i - \x1b[32mOK\x1b[0m\n", getVisitorsNumberFromEventTestValue, n);
+        printf("     - getVisitorsNumberFromEvent= %i == %i - %sOK%s\n", getVisitorsNumberFromEventTestValue, n, FontGreen, ColorClear);
     }
     else
     {
         printf("     - getVisitorsNumberFromEvent= %i =/= %i - %sFALSE%s\n", getVisitorsNumberFromEventTestValue, n, FontRed, ColorClear);
     }
     freeEvent(event1);
-    printf("     - freeEvent - \x1b[32mOK\x1b[0m\n");
+    printf("     - freeEvent - %sOK%s\n", FontGreen, ColorClear);
 }
 
 //Az Events adatszerkezet tesztje.
@@ -92,46 +92,46 @@ int testEvents(int n, int m)
     printf("\n+ testEvents - %i, %i\n", n, m);
 
     Events* events = newEvents();
-    printf("     + newEvents - \x1b[32mOK\x1b[0m \n");
+    printf("     + newEvents - %sOK%s \n", FontGreen, ColorClear);
 
     int i;
     for(i = 0; i < n; ++i)
     {
         Event* event = newEvent(i,"event");
-        printf("          + newEvent %i - \x1b[32mOK\x1b[0m \n", (i+1));
+        printf("          + newEvent %i - %sOK%s \n", (i+1), FontGreen, ColorClear);
         int j;
         for(j = 0; j < m; ++j)
         {
             Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
-            printf("               + newVisitor %i - \x1b[32mOK\x1b[0m\n", (j+1));
+            printf("               + newVisitor %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
             addVisitorToEvent(event, visitor);
-            printf("               + addVisitorToEvent %i - \x1b[32mOK\x1b[0m\n", (j+1));
+            printf("               + addVisitorToEvent %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
         }
         addEventToEvents(events, event);
-        printf("          addEventToEvents %i - \x1b[32mOK\x1b[0m \n", (i+1));
+        printf("          addEventToEvents %i - %sOK%s \n", (i+1), FontGreen, ColorClear);
     }
 
     freeEvents(events);
-    printf("     + freeEvents - \x1b[32mOK\x1b[0m \n");
+    printf("     + freeEvents - %sOK%s \n", FontGreen, ColorClear);
 }
 
 int consoleColorsTest()
 {
     printf("\n+ consoleColorsTest");
-    printf("\n|      %s%sFontBlack%s",   FontBackWhite, FontBlack, ColorClear);
-    printf("\n|      %sFontRed%s",       FontRed,       ColorClear);
-    printf("\n|      %sFontGreen%s",     FontGreen,     ColorClear);
-    printf("\n|      %sFontYellow%s",    FontYellow,    ColorClear);
-    printf("\n|      %sFontPurple%s",    FontPurple,    ColorClear);
-    printf("\n|      %sFontCyan%s",      FontCyan,      ColorClear);
-    printf("\n|      %sFontWhite%s",     FontWhite,     ColorClear);
+    printf("\n|      %s%sFontBlack%s",     FontBackWhite, FontBlack,   ColorClear);
+    printf("\n|      %sFontRed%s",         FontRed,       ColorClear);
+    printf("\n|      %sFontGreen%s",       FontGreen,     ColorClear);
+    printf("\n|      %sFontYellow%s",      FontYellow,    ColorClear);
+    printf("\n|      %sFontPurple%s",      FontPurple,    ColorClear);
+    printf("\n|      %sFontCyan%s",        FontCyan,      ColorClear);
+    printf("\n|      %sFontWhite%s",       FontWhite,     ColorClear);
     printf("\n+ consoleColorsTest");
-    printf("\n|      %sFontBackBlack%s", FontBackBlack, ColorClear);
-    printf("\n|      %sFontBackRed%s",   FontBackRed,   ColorClear);
-    printf("\n|      %sFontBackGreen%s", FontBackGreen, ColorClear);
-    printf("\n|      %sFontBackYellow%s",FontBackYellow,ColorClear);
-    printf("\n|      %sFontBackBlue%s",  FontBackBlue,  ColorClear);
-    printf("\n|      %sFontBackPurple%s",FontBackPurple,ColorClear);
-    printf("\n|      %sFontBackCyan%s",  FontBackCyan,  ColorClear);
-    printf("\n|      %s%sFontBackWhite%s", FontBlack,     FontBackWhite, ColorClear);
+    printf("\n|      %sFontBackBlack%s",   FontBackBlack, ColorClear);
+    printf("\n|      %sFontBackRed%s",     FontBackRed,   ColorClear);
+    printf("\n|      %sFontBackGreen%s",   FontBackGreen, ColorClear);
+    printf("\n|      %sFontBackYellow%s",  FontBackYellow,ColorClear);
+    printf("\n|      %sFontBackBlue%s",    FontBackBlue,  ColorClear);
+    printf("\n|      %sFontBackPurple%s",  FontBackPurple,ColorClear);
+    printf("\n|      %sFontBackCyan%s",    FontBackCyan,  ColorClear);
+    printf("\n|      %s%sFontBackWhite%s", FontBlack,   FontBackWhite, ColorClear);
 }

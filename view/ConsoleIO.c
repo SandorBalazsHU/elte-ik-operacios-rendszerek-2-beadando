@@ -58,9 +58,9 @@ void printIntro()
 		spacer[i] = ' ';
 		line[i] = '-'; 
 	}
-	printf("%s\x1b[32m +---------------------------------------------------------+\x1b[0m\n",spacer);
-	printf("+%s\x1b[32m|  \"King of Stands\" elektronikus látogatói nyilvántartás  |\x1b[0m%s+\n",line,line);
-	printf("%s\x1b[32m +---------------------------------------------------------+\x1b[0m\n",spacer);
+	printf("%s%s +---------------------------------------------------------+%s\n",spacer, FontGreen, ColorClear);
+	printf("+%s%s|  \"King of Stands\" elektronikus látogatói nyilvántartás  |%s%s+\n", line, FontGreen, ColorClear, line);
+	printf("%s%s +---------------------------------------------------------+%s\n",spacer, FontGreen, ColorClear);
 }
 
 //A menü kirajzolása
@@ -70,10 +70,10 @@ void printMenu(char** menuItems, int menuItemsNumber)
 	for(i = 0; i < menuItemsNumber; ++i)
 	{
 	printf("          +--------------------+ \n");
-	printf("      \x1b[32m%i.)\x1b[0m |%s| \n", (i+1), menuItems[i]);
+	printf("      %s%i.)%s |%s| \n", FontGreen, (i+1), ColorClear, menuItems[i]);
 	printf("          +--------------------+ \n");
 	}
-	printf("      \x1b[32m+\x1b[0m Valassz funkciot: ");
+	printf("      %s+%s Valassz funkciot: ", FontGreen, ColorClear);
 }
 
 /*A menük logikája
@@ -90,7 +90,7 @@ char menuGenerator(char* menuItems)
 	{
 		if ((selectedMenuItem != '~') && ( selectedMenuItem != '\n') && ( state == 0))
 		{
-			printf("      \x1b[32m+\x1b[0m Hibás érték! Add meg újra: ");
+			printf("      %s+%s Hibás érték! Add meg újra: ", FontGreen, ColorClear);
 			state++;
 		}
 		selectedMenuItem = getchar();
