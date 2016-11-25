@@ -1,10 +1,7 @@
 # elte-ik-os-1
 Az ELTE IK Operációs rendszerek tantárgyának első beadandó feladata.
-## Készítette:
-### - Sándor Balázs - AZA6NL
-
+### Készítette: - Sándor Balázs - AZA6NL
 ## A feladat szövege:
-
 ### 1. beadandó feladat.
 Készítsen C programot, amely rendszerhívások alkalmazásával megoldja a következő feladatot:
 
