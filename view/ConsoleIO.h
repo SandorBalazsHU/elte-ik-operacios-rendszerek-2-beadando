@@ -62,4 +62,7 @@
     //Kilistázza a paraméterrül kapott EVENTS ből az eseményeket táblázatos formában.ú
     void printEvents(Events* event);
 
+    //Állandó karaktersor generátor
+    void spacerGenerator(char*, char, int);
+
 #endif

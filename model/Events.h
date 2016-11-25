@@ -62,12 +62,6 @@
     //Esemény törlése az eseménytárolóból
     int deleteEventFromEvents(Events*, Event*);
 
-    //Index szerinti keresés az események között
-    struct Event* getEventFromEventsById(Events*, int);
-
-    //Visszaadja a tárolt események számát.
-    int getEventNumberFromEvents(Events*);
-
     /*Az Events típus destruktora
     Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában
     Törli a tömb által mutatott elemeket is!*/

@@ -112,9 +112,37 @@ char menuGenerator(char* menuItems)
 void printEvents(Events* events)
 {
 	int i;
-	for(i=0; i<getEventNumberFromEvents(events); ++i)
+	int fullWidth = 0;
+	int fullNameWidth = 0;
+
+	for(i=0; i<events->size; ++i)
 	{
-		Event* tmpEvent = getEventFromEventsById(events, i);
-		 printf("");
+		int len = strlen(events->eventsArray[i]->name);
+		if(len>fullNameWidth) fullNameWidth = len;
+	}
+	fullWidth = (int) fullNameWidth + 16;
+
+	int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
+	char spacer[spacerWidth];
+	spacerGenerator(spacer, ' ', spacerWidth);
+
+	char nameLine[fullNameWidth+2];
+	spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
+	
+	printf("%s+-----+%s+-----+\n", spacer, nameLine);
+	for(i=0; i<events->size; ++i)
+	{
+		Event* tmpEvent = events->eventsArray[i];
+		printf("%s| %i   | %s | %i   |\n", spacer, tmpEvent->id, tmpEvent->name, tmpEvent->size);
+	}
+	printf("%s+-----+%s+-----+\n", spacer, nameLine);
+}
+
+void spacerGenerator(char* spacer, char c, int n)
+{
+	int i;
+	for(i = 0; i < n; ++i)
+	{
+		spacer[i] = c;
 	}
 }

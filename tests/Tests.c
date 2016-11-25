@@ -23,9 +23,14 @@ int test(int argc, char** argv)
     {
         if(strcmp(argv[1], testConsoleParameter) == 0)
         {
+        //UI tesztek
+            //Képernyőtörlés
+            clearScrean();
+
             //A konzol színezését teszteli
             consoleColorsTest();
 
+        //Adatszerkezetek tesztjei
             //A visitor adatszerkezet tesztje.
             testVisitor();
 
@@ -33,7 +38,7 @@ int test(int argc, char** argv)
             testEvent( 3 );
 
             //Az Event adatszerkezet tesztje több mint 5 elemre.
-            testEvent( 10 );
+            testEvent( 9 );
 
             //Az Events adatszerkezet tesztje kevesebb mint 5 elemre.
             testEvents( 3, 3 );
@@ -41,97 +46,120 @@ int test(int argc, char** argv)
             //Az Events adatszerkezet tesztje több mint 5 elemre.
             testEvents( 8, 3 );
 
+            //Az event listázó függvény tesztje
+            testPrintEvents( 8, 3 );
+
             return 1;
         }
     }
     return 0;
 }
 
+int consoleColorsTest()
+{
+    printf("\n-consoleColorsTest-+\n");
+    printf("                   |-> %s%sFontBlack%s\n",     FontBackWhite, FontBlack,   ColorClear);
+    printf("                   |-> %sFontRed%s\n",         FontRed,       ColorClear);
+    printf("                   |-> %sFontGreen%s\n",       FontGreen,     ColorClear);
+    printf("                   |-> %sFontYellow%s\n",      FontYellow,    ColorClear);
+    printf("                   |-> %sFontPurple%s\n",      FontPurple,    ColorClear);
+    printf("                   |-> %sFontCyan%s\n",        FontCyan,      ColorClear);
+    printf("                   |-> %sFontWhite%s\n",       FontWhite,     ColorClear);
+    printf("\n-consoleColorsTest-+\n");
+    printf("                   |-> %sFontBackBlack%s\n",   FontBackBlack, ColorClear);
+    printf("                   |-> %sFontBackRed%s\n",     FontBackRed,   ColorClear);
+    printf("                   |-> %sFontBackGreen%s\n",   FontBackGreen, ColorClear);
+    printf("                   |-> %sFontBackYellow%s\n",  FontBackYellow,ColorClear);
+    printf("                   |-> %sFontBackBlue%s\n",    FontBackBlue,  ColorClear);
+    printf("                   |-> %sFontBackPurple%s\n",  FontBackPurple,ColorClear);
+    printf("                   |-> %sFontBackCyan%s\n",    FontBackCyan,  ColorClear);
+    printf("                   |-> %s%sFontBackWhite%s\n", FontBlack,   FontBackWhite, ColorClear);
+}
+
 //A visitor adatszerkezet tesztje.
 int testVisitor()
 {
-    printf("\n testVisitor \n");
+    printf("\n-testVisitor-+\n");
 
     Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
-    printf("     newVisitor - %sOK%s\n", FontGreen, ColorClear);
+    printf("             |-> newVisitor - %sOK%s\n", FontGreen, ColorClear);
 
     freeVisitor(visitor1);
-    printf("     freeVisitor - %sOK%s\n", FontGreen, ColorClear);
+    printf("             |-> freeVisitor - %sOK%s\n", FontGreen, ColorClear);
 }
 
 //Az Event adatszerkezet tesztje.
 int testEvent(int n)
 {
-    printf("\n+ testEvent - %i\n", n);
+    printf("\n-testEvent---%i--+\n", n);
     Event* event1 = newEvent(0,"event1");
-    printf("     + newEvent - %sOK%s\n", FontGreen, ColorClear);
+    printf("                |-> newEvent - %sOK%s\n", FontGreen, ColorClear);
     int i;
         for(i = 0; i < n; ++i)
         {
             Visitor* visitor = newVisitor(i, "visitor", "visitor@mail.org", getDate());
-            printf("          + newVisitor %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
+            printf("                |-> newVisitor %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
             addVisitorToEvent(event1, visitor);
-            printf("          + addVisitorToEvent %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
+            printf("                |-> addVisitorToEvent %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
         }
     int getVisitorsNumberFromEventTestValue = getVisitorsNumberFromEvent(event1);
     if(getVisitorsNumberFromEventTestValue == n)
     {
-        printf("     - getVisitorsNumberFromEvent= %i == %i - %sOK%s\n", getVisitorsNumberFromEventTestValue, n, FontGreen, ColorClear);
+        printf("                |-> getVisitorsNumberFromEvent= %i == %i - %sOK%s\n", getVisitorsNumberFromEventTestValue, n, FontGreen, ColorClear);
     }
     else
     {
-        printf("     - getVisitorsNumberFromEvent= %i =/= %i - %sFALSE%s\n", getVisitorsNumberFromEventTestValue, n, FontRed, ColorClear);
+        printf("                |-> getVisitorsNumberFromEvent= %i =/= %i - %sFALSE%s\n", getVisitorsNumberFromEventTestValue, n, FontRed, ColorClear);
     }
     freeEvent(event1);
-    printf("     - freeEvent - %sOK%s\n", FontGreen, ColorClear);
+    printf("                |-> freeEvent - %sOK%s\n", FontGreen, ColorClear);
 }
 
 //Az Events adatszerkezet tesztje.
 int testEvents(int n, int m)
 {
-    printf("\n+ testEvents - %i, %i\n", n, m);
+    printf("\n-testEvents---%i-%i-+\n", n, m);
 
     Events* events = newEvents();
-    printf("     + newEvents - %sOK%s \n", FontGreen, ColorClear);
+    printf("                  |-> newEvents - %sOK%s \n", FontGreen, ColorClear);
 
     int i;
     for(i = 0; i < n; ++i)
     {
         Event* event = newEvent(i,"event");
-        printf("          + newEvent %i - %sOK%s \n", (i+1), FontGreen, ColorClear);
+        printf("                  |-> newEvent-%i---%sOK%s-+ \n", (i+1), FontGreen, ColorClear);
         int j;
         for(j = 0; j < m; ++j)
         {
             Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
-            printf("               + newVisitor %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
+            printf("                  |                   |-> newVisitor %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
             addVisitorToEvent(event, visitor);
-            printf("               + addVisitorToEvent %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
+            printf("                  |                   |-> addVisitorToEvent %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
         }
         addEventToEvents(events, event);
-        printf("          addEventToEvents %i - %sOK%s \n", (i+1), FontGreen, ColorClear);
+        printf("                  |-> addEventToEvents %i - %sOK%s \n", (i+1), FontGreen, ColorClear);
     }
 
     freeEvents(events);
-    printf("     + freeEvents - %sOK%s \n", FontGreen, ColorClear);
+    printf("                  |-> freeEvents - %sOK%s \n", FontGreen, ColorClear);
 }
 
-int consoleColorsTest()
+int testPrintEvents(int n, int m)
 {
-    printf("\n+ consoleColorsTest");
-    printf("\n|      %s%sFontBlack%s",     FontBackWhite, FontBlack,   ColorClear);
-    printf("\n|      %sFontRed%s",         FontRed,       ColorClear);
-    printf("\n|      %sFontGreen%s",       FontGreen,     ColorClear);
-    printf("\n|      %sFontYellow%s",      FontYellow,    ColorClear);
-    printf("\n|      %sFontPurple%s",      FontPurple,    ColorClear);
-    printf("\n|      %sFontCyan%s",        FontCyan,      ColorClear);
-    printf("\n|      %sFontWhite%s",       FontWhite,     ColorClear);
-    printf("\n+ consoleColorsTest");
-    printf("\n|      %sFontBackBlack%s",   FontBackBlack, ColorClear);
-    printf("\n|      %sFontBackRed%s",     FontBackRed,   ColorClear);
-    printf("\n|      %sFontBackGreen%s",   FontBackGreen, ColorClear);
-    printf("\n|      %sFontBackYellow%s",  FontBackYellow,ColorClear);
-    printf("\n|      %sFontBackBlue%s",    FontBackBlue,  ColorClear);
-    printf("\n|      %sFontBackPurple%s",  FontBackPurple,ColorClear);
-    printf("\n|      %sFontBackCyan%s",    FontBackCyan,  ColorClear);
-    printf("\n|      %s%sFontBackWhite%s", FontBlack,   FontBackWhite, ColorClear);
+    printf("\n-testPrintEvents---%i-%i-+\n", n, m);
+    Events* events = newEvents();
+    int i;
+    for(i = 0; i < n; ++i)
+    {
+        Event* event = newEvent(i,"event");
+        int j;
+        for(j = 0; j < m; ++j)
+        {
+            Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
+            addVisitorToEvent(event, visitor);
+        }
+        addEventToEvents(events, event);
+    }
+    printEvents(events);
+    freeEvents(events);
 }
