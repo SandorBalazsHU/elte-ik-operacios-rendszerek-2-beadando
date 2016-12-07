@@ -13,4 +13,4 @@ Készítsünk C programot, amellyel a leírt tevékenység elvégezhető. Az ada
 #### - Futtatás: ./Kos
 
 ## + Tesztelés:
-#### - Tesztek futtatása: ./kos -t
+#### - Tesztek futtatása: ./Kos -t

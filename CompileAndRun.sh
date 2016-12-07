@@ -12,7 +12,7 @@ if [ $? -ne 0 ]; then
     echo "Fordítás sikertelen!";
 else
     echo "Fordítás sikeres!";
-    read -n1 -r -p "Üss szóközt a futtatáshoz vagy t -t a tesztek futtatásért:" key;
+    read -n1 -r -p "Üss entert a futtatáshoz vagy t -t a tesztek futtatásért:" key;
     echo $key + ";";
     if [ "$key" != "t" ]; then
         ./Kos
