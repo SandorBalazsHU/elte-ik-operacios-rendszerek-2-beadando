@@ -9,8 +9,8 @@ Egy kiállításokat, rendezvényeket szervező társaság a "King of Stands", e
 
 Készítsünk C programot, amellyel a leírt tevékenység elvégezhető. Az adatokat fájlban tároljuk. 
 ## + Fordítás és futtatás:
-#### - Fordítás: ./cmp.sh
-#### - Futtatás: ./kos
+#### - Fordítás: ./CompileAndRun.sh.sh
+#### - Futtatás: ./Kos
 
 ## + Tesztelés:
 #### - Tesztek futtatása: ./kos -t
