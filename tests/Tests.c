@@ -48,6 +48,8 @@ int test(int argc, char** argv)
             //Az event listázó függvény tesztje
             testPrintEvents( 8, 3 );
 
+            testPrintVisitors(8);
+
             return 1;
         }
     }
@@ -150,7 +152,7 @@ int testPrintEvents(int n, int m)
     int i;
     for(i = 0; i < n; ++i)
     {
-        Event* event = newEvent(i,"event");
+        Event* event = newEvent(i,"árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
         int j;
         for(j = 0; j < m; ++j)
         {
@@ -160,5 +162,21 @@ int testPrintEvents(int n, int m)
         addEventToEvents(events, event);
     }
     printEvents(events);
+    freeEvents(events);
+}
+
+int testPrintVisitors(int n)
+{
+    printf("\n-testPrintVisitors---%i-+\n", n);
+    Events* events = newEvents();
+    Event* event = newEvent(0,"árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
+    int i;
+    for(i = 0; i < n; ++i)
+    {
+        Visitor* visitor = newVisitor(i, "árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP", "visitor@mail.org", getDate());
+        addVisitorToEvent(event, visitor);
+    }
+    addEventToEvents(events, event);
+    printVisitors(events, 0);
     freeEvents(events);
 }

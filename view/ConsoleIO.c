@@ -117,27 +117,77 @@ void printEvents(Events* events)
 
 	for(i=0; i<events->size; ++i)
 	{
-		int len = strlen(events->eventsArray[i]->name);
+		int len = _strlenForUnicode(events->eventsArray[i]->name);
 		if(len>fullNameWidth) fullNameWidth = len;
 	}
 	fullWidth = (int) fullNameWidth + 16;
 
 	int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
-	char spacer[spacerWidth];
+	char spacer[spacerWidth+2];
 	spacerGenerator(spacer, ' ', spacerWidth);
 
-	char nameLine[fullNameWidth+2];
+	char nameLine[fullNameWidth+4];
 	spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
 	
-	printf("%s+-----+%s+-----+\n", spacer, nameLine);
+	printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
 	for(i=0; i<events->size; ++i)
 	{
 		Event* tmpEvent = events->eventsArray[i];
-		printf("%s| %i   | %s | %i   |\n", spacer, tmpEvent->id, tmpEvent->name, tmpEvent->size);
+		printf("%s| %i   | %s | %i   |\n", spacer, (int) (tmpEvent->id + 1), tmpEvent->name, tmpEvent->size);
+		printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
 	}
-	printf("%s+-----+%s+-----+\n", spacer, nameLine);
 }
 
+void printVisitors(Events* events, int eventID)
+{
+	int i;
+	int fullWidth = 0;
+	int fullNameWidth = 0;
+	int fullEmailWidth = 0;
+
+	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	{
+		int len = _strlenForUnicode(events->eventsArray[eventID]->visitorArray[i]->name);
+		if(len>fullNameWidth) fullNameWidth = len;
+	}
+
+	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	{
+		int len = _strlenForUnicode(events->eventsArray[eventID]->visitorArray[i]->email);
+		if(len>fullEmailWidth) fullEmailWidth = len;
+	}
+
+	fullWidth = (int) fullNameWidth + fullEmailWidth + 30;
+
+	int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
+	char spacer[spacerWidth+2];
+	spacerGenerator(spacer, ' ', spacerWidth);
+
+	char nameLine[fullNameWidth+4];
+	spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
+	char emailLine[fullEmailWidth+4];
+	spacerGenerator(emailLine, '-', (int) (fullEmailWidth+2));
+	
+	printf("%s%s+%s A/Az [%s] eseményre jelentkezett vendégek: \n", spacer, FontGreen, ColorClear, events->eventsArray[eventID]->name);
+	printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s--------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
+	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	{
+		Visitor* tmpVisitor = events->eventsArray[eventID]->visitorArray[i];
+		printf("%s| %i   | %s | %s | ", spacer, (int) (tmpVisitor->id + 1), tmpVisitor->name, tmpVisitor->email);
+		datePrintOut(tmpVisitor->date);
+		printf(" |\n");
+		printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s--------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
+	}
+}
+
+/*
+	Megadott hosszúságú sort generál egy karakterből és a hosszából.
+	FIGYELEM: A szügségesnél 2-vel nagyobb tömböt kell deklarálni számára.
+	-Paraméterek: +
+				  |-spacer: A tömb amivel dolgozni fog (Mérete N+2 legyen!)
+				  |-c: A karakter amiből a sort geneálja
+				  |-n: A kívánt sor hossza.
+*/
 void spacerGenerator(char* spacer, char c, int n)
 {
 	int i;
@@ -145,4 +195,16 @@ void spacerGenerator(char* spacer, char c, int n)
 	{
 		spacer[i] = c;
 	}
+	spacer[n+1] = '\0';
+	spacer[n+2] = '\0';
+}
+
+int _strlenForUnicode(char* s)
+{
+   int i = 0, j = 0;
+   while (s[i]) {
+     if ((s[i] & 0xc0) != 0x80) j++;
+     i++;
+   }
+   return j;
 }

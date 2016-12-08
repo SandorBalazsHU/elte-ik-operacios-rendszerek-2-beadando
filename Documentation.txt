@@ -4,107 +4,123 @@ Git: https://github.com/SandorBalazsHU/elte-ik-os-1
 
 A projekt alapvető dokumentációja
 
-Menürendszer
+A feladatkiírás felbontása funkcionalitásokra:
+    + Készítsen C programot
+    + amely rendszerhívások alkalmazásával megoldja a következő feladatot:
 
-//Főképernyő ->- FROM: \
-1.) +-SCREEN1
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-LIST EVENTS
-    |-MAIN MENU:+
-                |->-Jelentkezés       --> SCREEN2
-                |->-Adminisztráció    --> SCREEN3
-                |->-Kilépés           --> EXIT
-//Jelentkezés ->- FROM: SCREEN1
-2.) +-SCREEN2
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-LIST EVENTS
-    |-INPUT FORM:+
-                 |-<-NAME
-                 |-<-EMAIL
-                 |-<-EVENTID
-                 |-<-SUB MENU:+
-                              |->-Mentés    --> SCREEN1
-							  |->-Mégse     --> SCREEN1
-//Adminisztráció ->- FROM: SCREEN1
-3.) +-SCREEN3
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-SUB MENU:+
-               |->-Vendéglista            --> SCREEN4
-               |->-Rendezvényszervezés    --> SCREEN5
-               |->-Rendezvénytörlés       --> SCREEN6
-               |->-Vissza                 --> SCREEN1
-//Vendéglista ->- FROM: SCREEN3
-4.) +-SCREEN4
-    |-CLEAR 
-    |-HEADER
-	|-SUBHEADER
-    |-LIST VISITORS
-	|-INPUT FORM:+
-    |            |-<-EVENTID
-	|			 
-    |-SUB MENU:+
-               |->-Listáz    --> SCREEN7
-               |->-Vissza    --> SCREEN3
-//Rendezvényszervezés ->- FROM: SCREEN5
-5.) +-SCREEN5
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-INPUT FORM:+
-    |            |-<-EVENTNAME
-    |-SUB MENU:+
-               |->-Mentés    --> SCREEN3
-               |->-Mégse     --> SCREEN3
-//Rendezvénytörlés ->- FROM: SCREEN3
-6.) +-SCREEN6
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-LIST EVENTS
-	|-INPUT FORM:+
-    |            |-<-EVENTID
-	|			 
-    |-SUB MENU:+
-               |->-Listáz    --> SCREEN7
-               |->-Vissza    --> SCREEN3
-//Listáz (Vendégeket)  ->- FROM: SCREEN4
-7.) +-SCREEN7
-    |-CLEAR
-	|-HEADER
-	|-SUBHEADER
-    |-SUB MENU:+
-               |->-Vendégmódosítás    --> SCREEN8
-               |->-Vendégtörlés       --> SCREEN9
-               |->-Mentés             --> SCREEN4
-			   |->-Mégse              --> SCREEN4
-//Vendégmódosítás ->- FROM: SCREEN7
-8.) +-SCREEN7
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-LIST EVENTS
-    |-INPUT FORM:+
-                 |-<-NAME
-                 |-<-EMAIL
-                 |-<-EVENTID
-                 |-<-SUB MENU:+
-                              |->-Mentés    --> SCREEN7
-							  |->-Mégse     --> SCREEN7
-//Vendégtörlés ->- FROM: SCREEN7
-6.) +-SCREEN6
-    |-CLEAR
-    |-HEADER
-	|-SUBHEADER
-    |-LIST VISITORS
-	|-INPUT FORM:+
-    |            |-<-VISITORID
-	|			 
-    |-SUB MENU:+
-               |->-Listáz    --> SCREEN7
-               |->-Vissza    --> SCREEN3
+    + Egy kiállításokat, rendezvényeket szervező társaság a "King of Stands", elektronikus látogatói nyilvántartást készített.
+
+    + Az alkalmazás adjon lehetőséget vendég jelentkezéshez.
+    + A látogatók a nyilvántartásba jelentkezéskor
+        - megadják nevüket, mail címüket, a rendezvény azonosító számát!
+        - Az elektronikus rendszer a jelentkezés nyugtázásaként visszaadja, hogy hányadik vendégként történt meg a regisztráció!
+        - A jelentkezőknél a korábbi adatok mellett rögzítsük automatikusan a jelentkezési időt(rendszeridő) is(ezt nem kell bekérni)! 
+    + Az alkalmazás adjon lehetőséget a jelentkezettek listázásához
+    + egy vendég adatainak módosításához
+    + vendég törléséhez.
+    + Legyen lehetőségünk egy új rendezvény indításához
+    + egy rendezvény összes adatának törléséhez!
+
+Menürendszer: 
+    Főképernyő ->- FROM: \
+    1.) +-SCREEN1
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-LIST EVENTS
+        |-MAIN MENU:+
+                    |->-Jelentkezés       --> SCREEN2
+                    |->-Adminisztráció    --> SCREEN3
+                    |->-Kilépés           --> EXIT
+    Jelentkezés ->- FROM: SCREEN1
+    2.) +-SCREEN2
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+                    |-<-NAME
+                    |-<-EMAIL
+                    |-<-EVENTID
+                    |-<-SUB MENU:+
+                                |->-Mentés    --> SCREEN1
+                                |->-Mégse     --> SCREEN1
+    Adminisztráció ->- FROM: SCREEN1
+    3.) +-SCREEN3
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-SUB MENU:+
+                |->-Vendéglista            --> SCREEN4
+                |->-Rendezvényszervezés    --> SCREEN5
+                |->-Rendezvénytörlés       --> SCREEN6
+                |->-Vissza                 --> SCREEN1
+    Vendéglista ->- FROM: SCREEN3
+    4.) +-SCREEN4
+        |-CLEAR 
+        |-HEADER
+        |-SUBHEADER
+        |-LIST VISITORS
+        |-INPUT FORM:+
+        |            |-<-EVENTID
+        |			 
+        |-SUB MENU:+
+                |->-Listáz    --> SCREEN7
+                |->-Vissza    --> SCREEN3
+    Rendezvényszervezés ->- FROM: SCREEN5
+    5.) +-SCREEN5
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-INPUT FORM:+
+        |            |-<-EVENTNAME
+        |-SUB MENU:+
+                |->-Mentés    --> SCREEN3
+                |->-Mégse     --> SCREEN3
+    Rendezvénytörlés ->- FROM: SCREEN3
+    6.) +-SCREEN6
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+        |            |-<-EVENTID
+        |			 
+        |-SUB MENU:+
+                |->-Listáz    --> SCREEN7
+                |->-Vissza    --> SCREEN3
+    Listáz (Vendégeket)  ->- FROM: SCREEN4
+    7.) +-SCREEN7
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-SUB MENU:+
+                |->-Vendégmódosítás    --> SCREEN8
+                |->-Vendégtörlés       --> SCREEN9
+                |->-Mentés             --> SCREEN4
+                |->-Mégse              --> SCREEN4
+    Vendégmódosítás ->- FROM: SCREEN7
+    8.) +-SCREEN7
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-LIST EVENTS
+        |-INPUT FORM:+
+                    |-<-NAME
+                    |-<-EMAIL
+                    |-<-EVENTID
+                    |-<-SUB MENU:+
+                                |->-Mentés    --> SCREEN7
+                                |->-Mégse     --> SCREEN7
+    Vendégtörlés ->- FROM: SCREEN7
+    6.) +-SCREEN6
+        |-CLEAR
+        |-HEADER
+        |-SUBHEADER
+        |-LIST VISITORS
+        |-INPUT FORM:+
+        |            |-<-VISITORID
+        |			 
+        |-SUB MENU:+
+                |->-Listáz    --> SCREEN7
+                |->-Vissza    --> SCREEN3

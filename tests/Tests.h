@@ -34,4 +34,6 @@
 
         //Az event listázó függvény tesztje
         int testPrintEvents(int n, int m);
+
+        int testPrintVisitors(int);
 #endif

@@ -14,3 +14,5 @@ Készítsünk C programot, amellyel a leírt tevékenység elvégezhető. Az ada
 
 ## + Tesztelés:
 #### - Tesztek futtatása: ./Kos -t
+## + Dokumentáció:
+#### Részletesebb dokumentációért olvasd el a Documentation.txt -t.
