@@ -10,6 +10,8 @@
 #ifndef VIEWS_H
 #define VIEWS_H
 
-void View1();
+int View1();
+int View2();
+int View3();
 
 #endif

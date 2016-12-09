@@ -11,7 +11,7 @@
 #include "ConsoleIO.h"
 #include "Views.h"
 
-void View1()
+int View1()
 {
     clearScrean();
     printIntro();
@@ -27,15 +27,29 @@ void View1()
     switch(selectedMainMenuitem)
     {
         case '1' :
-            printf("1!\n" );
+            View2();
         break;
         case '2' :
-            printf("2!\n" );
+            View3();
         break;
         case '3' :
-            printf("3!\n" );
+            return 0;
         break;
         default :
             printf("HIBA!\n" );
     }
+}
+
+int View2()
+{
+    clearScrean();
+    printIntro();
+    printf("Wiew2\n");
+}
+
+int View3()
+{
+    clearScrean();
+    printIntro();
+    printf("Wiew3\n");
 }

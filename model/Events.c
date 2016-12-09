@@ -14,7 +14,7 @@
 #include "./Event.h"
 
 //Új üres eseménytároló létrehozásához
-struct Events* newEvents(int id, char* name)
+struct Events* newEvents()
 {
 	struct Events* _this = malloc(sizeof(struct Events));
 	_this->size = 0;

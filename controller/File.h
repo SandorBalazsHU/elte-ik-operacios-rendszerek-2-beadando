@@ -5,3 +5,19 @@
 
     A fájlkezelésért felelős függvények
 */
+
+#ifndef FILE_H
+#define FILE_H
+    #include <stdio.h>
+    #include "../model/Events.h"
+    #include "../model/Event.h"
+    #include "../model/Visitor.h"
+
+    Events* eventsReaderForBinFiles(FILE* f);
+    Event* eventReaderForBinFiles(FILE*, int);
+    Visitor* visitorReaderForBinFiles(FILE*, int);
+    FILE* openBinFileForRead(const char*);
+    FILE* openBinFileForWrite(const char*);
+    int getFileSize(FILE* f);
+
+#endif
