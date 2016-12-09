@@ -23,17 +23,17 @@ A feladatkiírás felbontása funkcionalitásokra:
 
 Menürendszer: 
     Főképernyő ->- FROM: \
-    1.) +-SCREEN1
+    1.) +-VIEW1
         |-CLEAR
         |-HEADER
         |-SUBHEADER
         |-LIST EVENTS
         |-MAIN MENU:+
-                    |->-Jelentkezés       --> SCREEN2
-                    |->-Adminisztráció    --> SCREEN3
+                    |->-Jelentkezés       --> VIEW2
+                    |->-Adminisztráció    --> VIEW3
                     |->-Kilépés           --> EXIT
-    Jelentkezés ->- FROM: SCREEN1
-    2.) +-SCREEN2
+    Jelentkezés ->- FROM: VIEW1
+    2.) +-VIEW2
         |-CLEAR
         |-HEADER
         |-SUBHEADER
@@ -43,20 +43,20 @@ Menürendszer:
                     |-<-EMAIL
                     |-<-EVENTID
                     |-<-SUB MENU:+
-                                |->-Mentés    --> SCREEN1
-                                |->-Mégse     --> SCREEN1
-    Adminisztráció ->- FROM: SCREEN1
-    3.) +-SCREEN3
+                                |->-Mentés    --> VIEW1
+                                |->-Mégse     --> VIEW1
+    Adminisztráció ->- FROM: VIEW1
+    3.) +-VIEW3
         |-CLEAR
         |-HEADER
         |-SUBHEADER
         |-SUB MENU:+
-                |->-Vendéglista            --> SCREEN4
-                |->-Rendezvényszervezés    --> SCREEN5
-                |->-Rendezvénytörlés       --> SCREEN6
-                |->-Vissza                 --> SCREEN1
-    Vendéglista ->- FROM: SCREEN3
-    4.) +-SCREEN4
+                |->-Vendéglista            --> VIEW4
+                |->-Rendezvényszervezés    --> VIEW5
+                |->-Rendezvénytörlés       --> VIEW6
+                |->-Vissza                 --> VIEW1
+    Vendéglista ->- FROM: VIEW3
+    4.) +-VIEW4
         |-CLEAR 
         |-HEADER
         |-SUBHEADER
@@ -65,20 +65,20 @@ Menürendszer:
         |            |-<-EVENTID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> SCREEN7
-                |->-Vissza    --> SCREEN3
-    Rendezvényszervezés ->- FROM: SCREEN5
-    5.) +-SCREEN5
+                |->-Listáz    --> VIEW7
+                |->-Vissza    --> VIEW3
+    Rendezvényszervezés ->- FROM: VIEW5
+    5.) +-VIEW5
         |-CLEAR
         |-HEADER
         |-SUBHEADER
         |-INPUT FORM:+
         |            |-<-EVENTNAME
         |-SUB MENU:+
-                |->-Mentés    --> SCREEN3
-                |->-Mégse     --> SCREEN3
-    Rendezvénytörlés ->- FROM: SCREEN3
-    6.) +-SCREEN6
+                |->-Mentés    --> VIEW3
+                |->-Mégse     --> VIEW3
+    Rendezvénytörlés ->- FROM: VIEW3
+    6.) +-VIEW6
         |-CLEAR
         |-HEADER
         |-SUBHEADER
@@ -87,20 +87,20 @@ Menürendszer:
         |            |-<-EVENTID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> SCREEN7
-                |->-Vissza    --> SCREEN3
-    Listáz (Vendégeket)  ->- FROM: SCREEN4
-    7.) +-SCREEN7
+                |->-Listáz    --> VIEW7
+                |->-Vissza    --> VIEW3
+    Listáz (Vendégeket)  ->- FROM: VIEW4
+    7.) +-VIEW7
         |-CLEAR
         |-HEADER
         |-SUBHEADER
         |-SUB MENU:+
-                |->-Vendégmódosítás    --> SCREEN8
-                |->-Vendégtörlés       --> SCREEN9
-                |->-Mentés             --> SCREEN4
-                |->-Mégse              --> SCREEN4
-    Vendégmódosítás ->- FROM: SCREEN7
-    8.) +-SCREEN7
+                |->-Vendégmódosítás    --> VIEW8
+                |->-Vendégtörlés       --> VIEW9
+                |->-Mentés             --> VIEW4
+                |->-Mégse              --> VIEW4
+    Vendégmódosítás ->- FROM: VIEW7
+    8.) +-VIEW7
         |-CLEAR
         |-HEADER
         |-SUBHEADER
@@ -110,10 +110,10 @@ Menürendszer:
                     |-<-EMAIL
                     |-<-EVENTID
                     |-<-SUB MENU:+
-                                |->-Mentés    --> SCREEN7
-                                |->-Mégse     --> SCREEN7
-    Vendégtörlés ->- FROM: SCREEN7
-    6.) +-SCREEN6
+                                |->-Mentés    --> VIEW7
+                                |->-Mégse     --> VIEW7
+    Vendégtörlés ->- FROM: VIEW7
+    6.) +-VIEW6
         |-CLEAR
         |-HEADER
         |-SUBHEADER
@@ -122,5 +122,5 @@ Menürendszer:
         |            |-<-VISITORID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> SCREEN7
-                |->-Vissza    --> SCREEN3
+                |->-Listáz    --> VIEW7
+                |->-Vissza    --> VIEW3

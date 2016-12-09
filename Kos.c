@@ -10,22 +10,14 @@
 
 int main(int argc, char** argv)
 {
+    //Tesztek futtatása megfeleő argumentum esetén.
     if(test(argc, argv))
     {
         return 0;
     }
 
-    clearScrean();
-    printIntro();
+    //Ha nem a teszteket futtatjuk akkor kitesszük az első nézetet.
+    View1();
 
-    char* mainMenu[3];
-    mainMenu[0] = "Jelentkezés         ";
-    mainMenu[1] = "Adminisztráció      ";
-    mainMenu[2] = "Kilépés             ";
-    printMenu(mainMenu, 3);
-
-    char selectedMainMenuitem = menuGenerator("123");
-    printf(" - Selected: %c \n", selectedMainMenuitem);
-    
     return 0;
 }

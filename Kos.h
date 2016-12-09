@@ -12,6 +12,9 @@
 //A konzolkezelő függvények gyűjteménye
 #include "./view/ConsoleIO.h"
 
+//A menünézetek megvalósításai.
+#include "./view/Views.h"
+
 //Az eseménytároló adatszerkezet és a hozzá tartozó függvények gyűjteménye.
 #include "./model/Events.h"
 
