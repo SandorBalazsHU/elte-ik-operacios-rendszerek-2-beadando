@@ -8,6 +8,8 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
 #include "./Tests.h"
 #include "../view/ConsoleIO.h"
 #include "../model/Events.h"
@@ -46,9 +48,9 @@ int test(int argc, char** argv)
             testEvents( 8, 3 );
 
             //Az event listázó függvény tesztje
-            testPrintEvents( 8, 3 );
+            testPrintEvents( 10, 20 );
 
-            testPrintVisitors(8);
+            testPrintVisitors(11);
 
             return 1;
         }
@@ -150,11 +152,16 @@ int testPrintEvents(int n, int m)
     printf("\n-testPrintEvents---%i-%i-+\n", n, m);
     Events* events = newEvents();
     int i;
+    srand(time(NULL));
     for(i = 0; i < n; ++i)
     {
-        Event* event = newEvent(i,"árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
+        int randomStringLenght = 1+rand()%50;
+        char randomString[randomStringLenght+2];
+		spacerGenerator(randomString, '*', randomStringLenght);
+        Event* event = newEvent(i,randomString);
         int j;
-        for(j = 0; j < m; ++j)
+        int randomVisitorNumber = rand()%m;
+        for(j = 0; j < randomVisitorNumber; ++j)
         {
             Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
             addVisitorToEvent(event, visitor);
@@ -167,13 +174,22 @@ int testPrintEvents(int n, int m)
 
 int testPrintVisitors(int n)
 {
+    srand(time(NULL));
     printf("\n-testPrintVisitors---%i-+\n", n);
     Events* events = newEvents();
     Event* event = newEvent(0,"árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
     int i;
     for(i = 0; i < n; ++i)
     {
-        Visitor* visitor = newVisitor(i, "árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP", "visitor@mail.org", getDate());
+        int randomNameLenght = 1+rand()%50;
+        char randomName[randomNameLenght+2];
+        spacerGenerator(randomName, '*', randomNameLenght);
+        int randomEmailLenght = 1+rand()%20;
+        char randomEmail[randomEmailLenght+2];
+        spacerGenerator(randomEmail, '*', randomEmailLenght);
+        //strcat(randomEmail,"@mail.org");
+
+        Visitor* visitor = newVisitor(i, randomName, randomEmail, getDate());
         addVisitorToEvent(event, visitor);
     }
     addEventToEvents(events, event);

@@ -77,4 +77,6 @@
 
     void _clearInputBuffer();
 
+    int numPlaces (int n);
+
 #endif

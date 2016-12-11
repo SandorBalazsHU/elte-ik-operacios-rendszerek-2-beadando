@@ -134,14 +134,14 @@ void printEvents(Events* events)
 	{
 		int i;
 		int fullWidth = 0;
-		int fullNameWidth = 0;
+		int fullNameWidth = 10;
 
 		for(i=0; i<events->size; ++i)
 		{
 			int len = _strlenForUnicode(events->eventsArray[i]->name);
 			if(len>fullNameWidth) fullNameWidth = len;
 		}
-		fullWidth = (int) fullNameWidth + 16;
+		fullWidth = (int) fullNameWidth + 30;
 
 		int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
 		char spacer[spacerWidth+2];
@@ -150,12 +150,23 @@ void printEvents(Events* events)
 		char nameLine[fullNameWidth+4];
 		spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
 		
-		printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		printf("%s%s+%s-----%s+%s%s%s+%s------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		char nameSpacer[fullNameWidth-7+2];
+		spacerGenerator(nameSpacer, ' ', fullNameWidth-7);
+		printf("%s| Id  | Esemény%s | Résztvevők száma |\n", spacer, nameSpacer);
+		printf("%s%s+%s-----%s+%s%s%s+%s------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		
 		for(i=0; i<events->size; ++i)
 		{
 			Event* tmpEvent = events->eventsArray[i];
-			printf("%s| %i   | %s | %i   |\n", spacer, (int) (tmpEvent->id + 1), tmpEvent->name, tmpEvent->size);
-			printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+			char nameSpacer[fullNameWidth-2-strlen(tmpEvent->name)+2];
+			spacerGenerator(nameSpacer, ' ', fullNameWidth-2-strlen(tmpEvent->name)+2);
+			char eventSizeSpacer[17-numPlaces(tmpEvent->size)+2];
+			spacerGenerator(eventSizeSpacer, ' ', 17-numPlaces(tmpEvent->size));
+			char idSpacer[4-numPlaces(i+1)+2];
+			spacerGenerator(idSpacer, ' ', 4-numPlaces(i+1));
+			printf("%s| %i%s| %s%s | %i%s|\n", spacer, i+1, idSpacer, tmpEvent->name, nameSpacer, tmpEvent->size, eventSizeSpacer);
+			printf("%s%s+%s-----%s+%s%s%s+%s------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
 		}
 	}
 	else
@@ -199,7 +210,15 @@ void printVisitors(Events* events, int eventID)
 	for(i=0; i<events->eventsArray[eventID]->size; ++i)
 	{
 		Visitor* tmpVisitor = events->eventsArray[eventID]->visitorArray[i];
-		printf("%s| %i   | %s | %s | ", spacer, (int) (tmpVisitor->id + 1), tmpVisitor->name, tmpVisitor->email);
+
+		char nameSpacer[fullNameWidth-strlen(tmpVisitor->name)+2];
+		spacerGenerator(nameSpacer, ' ', fullNameWidth-strlen(tmpVisitor->name));
+		char emailSpacer[fullEmailWidth-strlen(tmpVisitor->email)+2];
+		spacerGenerator(emailSpacer, ' ', fullEmailWidth-strlen(tmpVisitor->email));
+		char idSpacer[4-numPlaces(i+1)+2];
+		spacerGenerator(idSpacer, ' ', 4-numPlaces(i+1));
+
+		printf("%s| %i%s| %s%s | %s%s | ", spacer, i+1, idSpacer, tmpVisitor->name, nameSpacer, tmpVisitor->email, emailSpacer);
 		datePrintOut(tmpVisitor->date);
 		printf(" |\n");
 		printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s--------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
@@ -263,4 +282,19 @@ void _clearInputBuffer()
     {
         c = getchar();
     } while (c != '\n' && c != EOF);
+}
+
+//Hogy ne kelljen logaritmust számolni.
+int numPlaces (int n)
+{
+    if (n < 10) return 1;
+    if (n < 100) return 2;
+    if (n < 1000) return 3;
+    if (n < 10000) return 4;
+    if (n < 100000) return 5;
+    if (n < 1000000) return 6;
+    if (n < 10000000) return 7;
+    if (n < 100000000) return 8;
+    if (n < 1000000000) return 9;
+    return 10;
 }
