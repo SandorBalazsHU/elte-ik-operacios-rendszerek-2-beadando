@@ -16,7 +16,7 @@
 Events* eventsReaderForBinFiles(FILE* f)
 {
     Events* events = newEvents();
-	if(filesize(name) > 0)
+	if(getFileSize(f) > 0)
 	{
 		int size;
 		fread(&size,sizeof(size),1,f);
@@ -44,7 +44,7 @@ Event* eventReaderForBinFiles(FILE* f, int id)
         addVisitorToEvent(event, visitorReaderForBinFiles(f, i));
     }
 
-    return events;
+    return event;
 }
 
 Visitor* visitorReaderForBinFiles(FILE* f, int id)
@@ -59,7 +59,6 @@ Visitor* visitorReaderForBinFiles(FILE* f, int id)
     fread(email, emailSize+1, 1, f);
     time_t date;
     fread(&date, sizeof(date), 1, f);
-
 
     Visitor* visitor = newVisitor(id, name, email, date);
 
