@@ -57,6 +57,8 @@
     /*	Ha a tömb betelt, akkor dupla méretűt deklarálunk, átmásoljuk az adatokat
     és a régit töröljük a C++ STD Vector mintájára.*/
     int addEventToEvents(Events*, Event*);
+    
+    Event* getEventFromEventsById(Events*, int);
 
     //Esemény törlése az eseménytárolóból
     int deleteEventFromEvents(Events*, Event*);

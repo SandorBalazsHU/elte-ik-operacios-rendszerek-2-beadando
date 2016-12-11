@@ -13,6 +13,9 @@
     #include "../model/Event.h"
     #include "../model/Visitor.h"
 
+    void eventsWriterForBinFiles(Events*, FILE*);
+    void eventWriterForBinFiles(Event*, FILE*);
+    void visitorWriterForBinFiles(Visitor*, FILE*);
     Events* eventsReaderForBinFiles(FILE* f);
     Event* eventReaderForBinFiles(FILE*, int);
     Visitor* visitorReaderForBinFiles(FILE*, int);

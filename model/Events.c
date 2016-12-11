@@ -87,6 +87,10 @@ int deleteEventFromEvents(Events* events, Event* event)
 	return 0;
 }
 
+Event* getEventFromEventsById(Events* events, int id){
+	return events->eventsArray[id];
+}
+
 /*Az Events típus destruktora
 Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában
 Törli a tömb által mutatott elemeket is!*/
