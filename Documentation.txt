@@ -25,8 +25,8 @@ Menürendszer:
     Főképernyő ->- FROM: \
     1.) +-VIEW1
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST EVENTS
         |-MAIN MENU:+
                     |->-Jelentkezés       --> VIEW2
@@ -35,8 +35,8 @@ Menürendszer:
     Jelentkezés ->- FROM: VIEW1
     2.) +-VIEW2
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST EVENTS
         |-INPUT FORM:+
                     |-<-NAME
@@ -48,8 +48,8 @@ Menürendszer:
     Adminisztráció ->- FROM: VIEW1
     3.) +-VIEW3
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-SUB MENU:+
                 |->-Vendéglista            --> VIEW4
                 |->-Rendezvényszervezés    --> VIEW5
@@ -58,8 +58,8 @@ Menürendszer:
     Vendéglista ->- FROM: VIEW3
     4.) +-VIEW4
         |-CLEAR 
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST VISITORS
         |-INPUT FORM:+
         |            |-<-EVENTID
@@ -70,8 +70,8 @@ Menürendszer:
     Rendezvényszervezés ->- FROM: VIEW5
     5.) +-VIEW5
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-INPUT FORM:+
         |            |-<-EVENTNAME
         |-SUB MENU:+
@@ -80,8 +80,8 @@ Menürendszer:
     Rendezvénytörlés ->- FROM: VIEW3
     6.) +-VIEW6
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST EVENTS
         |-INPUT FORM:+
         |            |-<-EVENTID
@@ -92,8 +92,8 @@ Menürendszer:
     Listáz (Vendégeket)  ->- FROM: VIEW4
     7.) +-VIEW7
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-SUB MENU:+
                 |->-Vendégmódosítás    --> VIEW8
                 |->-Vendégtörlés       --> VIEW9
@@ -102,8 +102,8 @@ Menürendszer:
     Vendégmódosítás ->- FROM: VIEW7
     8.) +-VIEW7
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST EVENTS
         |-INPUT FORM:+
                     |-<-NAME
@@ -115,8 +115,8 @@ Menürendszer:
     Vendégtörlés ->- FROM: VIEW7
     6.) +-VIEW6
         |-CLEAR
+        |-INTRO
         |-HEADER
-        |-SUBHEADER
         |-LIST VISITORS
         |-INPUT FORM:+
         |            |-<-VISITORID

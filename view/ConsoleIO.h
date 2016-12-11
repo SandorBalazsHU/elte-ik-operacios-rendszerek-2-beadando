@@ -69,4 +69,8 @@
 
     int _strlenForUnicode(char*);
 
+    void errorMessage(char*);
+
+    void printHeader(char*);
+
 #endif

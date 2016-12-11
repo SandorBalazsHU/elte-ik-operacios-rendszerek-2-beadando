@@ -16,12 +16,12 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    FILE* f = openBinFileForRead(_dataFileName);
-    printf("--%i-----\n", getFileSize(f));
-    fclose(f);
+    FILE* datafile = openBinFileForRead(_dataFileName);
+    Events* events = eventsReaderForBinFiles(datafile);
+    fclose(datafile);
 
     //Ha nem a teszteket futtatjuk akkor kitesszük az első nézetet.
-    //View1();
+    View1();
 
     return 0;
 }

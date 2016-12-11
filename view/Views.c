@@ -26,30 +26,40 @@ int View1()
 
     switch(selectedMainMenuitem)
     {
-        case '1' :
-            View2();
+        case '1' : View2();
         break;
-        case '2' :
-            View3();
+        case '2' : View3();
         break;
-        case '3' :
-            return 0;
+        case '3' : return 0;
         break;
-        default :
-            printf("HIBA!\n" );
+        default : errorMessage("HIBA!\n" );
     }
 }
 
 int View2()
 {
     clearScrean();
+    printf("\n" );
     printIntro();
-    printf("Wiew2\n");
+    printHeader("- Jelentkezés -");
+
+    char* mainMenu[1];
+    mainMenu[0] = "Kilépés             ";
+    printMenu(mainMenu, 1);
+
+    char selectedMainMenuitem = menuGenerator("1");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' : return 0;
+        break;
+        default : errorMessage("HIBA!\n" );
+    }
 }
 
 int View3()
 {
     clearScrean();
     printIntro();
-    printf("Wiew3\n");
+    errorMessage("Wiew3\n");
 }

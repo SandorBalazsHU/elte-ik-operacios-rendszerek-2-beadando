@@ -48,19 +48,28 @@ int getConsoleWindowWidth()
 void printIntro()
 {
 	printf("\n");
-	int i, position = (int) (getConsoleWindowWidth()/2)-31;
-	char spacer[position+1];
-	char line[position+1];
-        spacer[position+1] = '\0';
-	line[position+1] = '\0'; 
-	for(i = 0; i < position; ++i)
-	{
-		spacer[i] = ' ';
-		line[i] = '-'; 
-	}
-	printf("%s%s +---------------------------------------------------------+%s\n",spacer, FontGreen, ColorClear);
+	int windowCenter = (int) (getConsoleWindowWidth()/2);
+	int spacerPosition = windowCenter-29-1;
+	char spacer[spacerPosition+2];
+	spacerGenerator(spacer, ' ', spacerPosition);
+	int linePosition = windowCenter-30-1;
+	char line[linePosition+2];
+	spacerGenerator(line, '-', linePosition);
+
+	printf("%s%s+---------------------------------------------------------+%s\n", spacer, FontGreen, ColorClear);
 	printf("+%s%s|  \"King of Stands\" elektronikus látogatói nyilvántartás  |%s%s+\n", line, FontGreen, ColorClear, line);
-	printf("%s%s +---------------------------------------------------------+%s\n",spacer, FontGreen, ColorClear);
+	printf("%s%s+---------------------------------------------------------+%s\n", spacer, FontGreen, ColorClear);
+
+}
+
+void printHeader(char* headerText)
+{
+	printf("\n");
+	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 1;
+	char spacer[position+2];
+	spacerGenerator(spacer, ' ', position);
+
+	printf("%s%s%s%s\n", spacer, FontGreen, headerText, ColorClear);
 }
 
 //A menü kirajzolása
@@ -195,8 +204,8 @@ void spacerGenerator(char* spacer, char c, int n)
 	{
 		spacer[i] = c;
 	}
+	spacer[n] = '\0';
 	spacer[n+1] = '\0';
-	spacer[n+2] = '\0';
 }
 
 int _strlenForUnicode(char* s)
@@ -207,4 +216,9 @@ int _strlenForUnicode(char* s)
      i++;
    }
    return j;
+}
+
+void errorMessage(char* errorMessageText)
+{
+	printf("- %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
 }
