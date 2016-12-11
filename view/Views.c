@@ -7,11 +7,12 @@
     A menünézetek megvalósításai.
     A nézetek részletezését lásd a Documentation.txt-ben.
 */
-
-#include "ConsoleIO.h"
+#include <unistd.h>
 #include "Views.h"
+#include "ConsoleIO.h"
+#include "../model/Events.h"
 
-int View1()
+int View1(Events* events)
 {
     clearScrean();
     printIntro();
@@ -26,34 +27,57 @@ int View1()
 
     switch(selectedMainMenuitem)
     {
-        case '1' : View2();
+        case '1' : View2(events);
         break;
         case '2' : View3();
         break;
         case '3' : return 0;
         break;
-        default : errorMessage("HIBA!\n" );
+        default : errorMessage("Hiba a menüben!\n" );
     }
 }
 
-int View2()
+int View2(Events* events)
 {
     clearScrean();
     printf("\n" );
     printIntro();
-    printHeader("- Jelentkezés -");
-
-    char* mainMenu[1];
-    mainMenu[0] = "Kilépés             ";
-    printMenu(mainMenu, 1);
-
-    char selectedMainMenuitem = menuGenerator("1");
-
-    switch(selectedMainMenuitem)
+    printHeader("Jelentkezés");
+    if(events->size > 0)
     {
-        case '1' : return 0;
-        break;
-        default : errorMessage("HIBA!\n" );
+        printEvents(events);
+
+        _clearInputBuffer();
+        int inputLimit = 200;
+        char* name = readFromConsole("Név", inputLimit);
+        char* email = readFromConsole("E-mail", inputLimit);
+        char* eventID = readFromConsole("A választott rendezvény száma", inputLimit);
+
+        char* subMenu[1];
+        subMenu[0] = "Mentés              ";
+        subMenu[1] = "Mégse               ";
+        printMenu(subMenu, 2);
+
+        char selectedMainMenuitem = menuGenerator("12");
+
+        switch(selectedMainMenuitem)
+        {
+            case '1' :
+                printMessage("Jelentkezésed elmentettük!");
+                sleep(sleepTime);
+                View1(events);
+            break;
+            case '2' : 
+                View1(events);
+            break;
+            default : errorMessage("Hiba a menüben!\n" );
+        }
+    }
+    else
+    {
+        printMessage("Nincsenek események!");
+        sleep(sleepTime);
+        View1(events);
     }
 }
 
@@ -61,5 +85,5 @@ int View3()
 {
     clearScrean();
     printIntro();
-    errorMessage("Wiew3\n");
+    errorMessage("Hiba a menüben!\n");
 }

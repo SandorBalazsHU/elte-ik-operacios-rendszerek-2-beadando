@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     fclose(datafile);
 
     //Ha nem a teszteket futtatjuk akkor kitesszük az első nézetet.
-    View1();
+    View1(events);
 
     return 0;
 }

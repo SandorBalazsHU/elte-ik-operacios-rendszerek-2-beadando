@@ -10,8 +10,11 @@
 #ifndef VIEWS_H
 #define VIEWS_H
 
-int View1();
-int View2();
-int View3();
+#include "../model/Events.h"
+
+    #define sleepTime 2
+    int View1(Events*);
+    int View2(Events*);
+    int View3();
 
 #endif

@@ -39,22 +39,22 @@ Menürendszer:
         |-HEADER
         |-LIST EVENTS
         |-INPUT FORM:+
-                    |-<-NAME
-                    |-<-EMAIL
-                    |-<-EVENTID
-                    |-<-SUB MENU:+
-                                |->-Mentés    --> VIEW1
-                                |->-Mégse     --> VIEW1
+                     |-<-NAME
+                     |-<-EMAIL
+                     |-<-EVENTID
+                     |-<-SUB MENU:+
+                                  |->-Mentés    --> VIEW1
+                                  |->-Mégse     --> VIEW1
     Adminisztráció ->- FROM: VIEW1
     3.) +-VIEW3
         |-CLEAR
         |-INTRO
         |-HEADER
         |-SUB MENU:+
-                |->-Vendéglista            --> VIEW4
-                |->-Rendezvényszervezés    --> VIEW5
-                |->-Rendezvénytörlés       --> VIEW6
-                |->-Vissza                 --> VIEW1
+                   |->-Vendéglista            --> VIEW4
+                   |->-Rendezvényszervezés    --> VIEW5
+                   |->-Rendezvénytörlés       --> VIEW6
+                   |->-Vissza                 --> VIEW1
     Vendéglista ->- FROM: VIEW3
     4.) +-VIEW4
         |-CLEAR 
@@ -65,8 +65,8 @@ Menürendszer:
         |            |-<-EVENTID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> VIEW7
-                |->-Vissza    --> VIEW3
+                   |->-Listáz    --> VIEW7
+                   |->-Vissza    --> VIEW3
     Rendezvényszervezés ->- FROM: VIEW5
     5.) +-VIEW5
         |-CLEAR
@@ -75,8 +75,8 @@ Menürendszer:
         |-INPUT FORM:+
         |            |-<-EVENTNAME
         |-SUB MENU:+
-                |->-Mentés    --> VIEW3
-                |->-Mégse     --> VIEW3
+                   |->-Mentés    --> VIEW3
+                   |->-Mégse     --> VIEW3
     Rendezvénytörlés ->- FROM: VIEW3
     6.) +-VIEW6
         |-CLEAR
@@ -87,18 +87,18 @@ Menürendszer:
         |            |-<-EVENTID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> VIEW7
-                |->-Vissza    --> VIEW3
+                   |->-Listáz    --> VIEW7
+                   |->-Vissza    --> VIEW3
     Listáz (Vendégeket)  ->- FROM: VIEW4
     7.) +-VIEW7
         |-CLEAR
         |-INTRO
         |-HEADER
         |-SUB MENU:+
-                |->-Vendégmódosítás    --> VIEW8
-                |->-Vendégtörlés       --> VIEW9
-                |->-Mentés             --> VIEW4
-                |->-Mégse              --> VIEW4
+                   |->-Vendégmódosítás    --> VIEW8
+                   |->-Vendégtörlés       --> VIEW9
+                   |->-Mentés             --> VIEW4
+                  |->-Mégse              --> VIEW4
     Vendégmódosítás ->- FROM: VIEW7
     8.) +-VIEW7
         |-CLEAR
@@ -106,12 +106,12 @@ Menürendszer:
         |-HEADER
         |-LIST EVENTS
         |-INPUT FORM:+
-                    |-<-NAME
-                    |-<-EMAIL
-                    |-<-EVENTID
-                    |-<-SUB MENU:+
-                                |->-Mentés    --> VIEW7
-                                |->-Mégse     --> VIEW7
+                     |-<-NAME
+                     |-<-EMAIL
+                     |-<-EVENTID
+                     |-<-SUB MENU:+
+                                  |->-Mentés    --> VIEW7
+                                  |->-Mégse     --> VIEW7
     Vendégtörlés ->- FROM: VIEW7
     6.) +-VIEW6
         |-CLEAR
@@ -122,5 +122,5 @@ Menürendszer:
         |            |-<-VISITORID
         |			 
         |-SUB MENU:+
-                |->-Listáz    --> VIEW7
-                |->-Vissza    --> VIEW3
+                   |->-Listáz    --> VIEW7
+                   |->-Vissza    --> VIEW3

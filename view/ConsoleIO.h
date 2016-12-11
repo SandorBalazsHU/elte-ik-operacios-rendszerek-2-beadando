@@ -73,4 +73,8 @@
 
     void printHeader(char*);
 
+    char* readFromConsole(char* , int);
+
+    void _clearInputBuffer();
+
 #endif

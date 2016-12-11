@@ -65,11 +65,21 @@ void printIntro()
 void printHeader(char* headerText)
 {
 	printf("\n");
-	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 1;
+	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 4 - 1;
 	char spacer[position+2];
 	spacerGenerator(spacer, ' ', position);
 
-	printf("%s%s%s%s\n", spacer, FontGreen, headerText, ColorClear);
+	printf("%s<-| %s%s%s |->\n", spacer, FontGreen, headerText, ColorClear);
+}
+
+void printMessage(char* headerText)
+{
+	printf("\n");
+	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 4 - 1;
+	char spacer[position+2];
+	spacerGenerator(spacer, ' ', position);
+
+	printf("%s<-|%s%s %s %s|->\n", spacer, FontBlack, FontBackYellow, headerText, ColorClear);
 }
 
 //A menü kirajzolása
@@ -120,30 +130,37 @@ char menuGenerator(char* menuItems)
 
 void printEvents(Events* events)
 {
-	int i;
-	int fullWidth = 0;
-	int fullNameWidth = 0;
-
-	for(i=0; i<events->size; ++i)
+	if(events->size > 0)
 	{
-		int len = _strlenForUnicode(events->eventsArray[i]->name);
-		if(len>fullNameWidth) fullNameWidth = len;
-	}
-	fullWidth = (int) fullNameWidth + 16;
+		int i;
+		int fullWidth = 0;
+		int fullNameWidth = 0;
 
-	int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
-	char spacer[spacerWidth+2];
-	spacerGenerator(spacer, ' ', spacerWidth);
+		for(i=0; i<events->size; ++i)
+		{
+			int len = _strlenForUnicode(events->eventsArray[i]->name);
+			if(len>fullNameWidth) fullNameWidth = len;
+		}
+		fullWidth = (int) fullNameWidth + 16;
 
-	char nameLine[fullNameWidth+4];
-	spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
-	
-	printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
-	for(i=0; i<events->size; ++i)
-	{
-		Event* tmpEvent = events->eventsArray[i];
-		printf("%s| %i   | %s | %i   |\n", spacer, (int) (tmpEvent->id + 1), tmpEvent->name, tmpEvent->size);
+		int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
+		char spacer[spacerWidth+2];
+		spacerGenerator(spacer, ' ', spacerWidth);
+
+		char nameLine[fullNameWidth+4];
+		spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
+		
 		printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		for(i=0; i<events->size; ++i)
+		{
+			Event* tmpEvent = events->eventsArray[i];
+			printf("%s| %i   | %s | %i   |\n", spacer, (int) (tmpEvent->id + 1), tmpEvent->name, tmpEvent->size);
+			printf("%s%s+%s-----%s+%s%s%s+%s-----%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear, nameLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		}
+	}
+	else
+	{
+		printMessage("Nincsenek események!");
 	}
 }
 
@@ -221,4 +238,29 @@ int _strlenForUnicode(char* s)
 void errorMessage(char* errorMessageText)
 {
 	printf("- %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
+}
+
+char* readFromConsole(char* label, int inputLimit)
+{
+	printf("%s+ %s: %s",FontGreen, label, ColorClear);
+	char text[inputLimit];
+	int i = 0;
+	char c;
+	while ((c = getchar()) != '\n' && c != EOF && i <= inputLimit)
+	{
+		text[i] = c;
+		++i;
+	}
+	text[i] = '\0';
+	return text;
+}
+
+// works only if the input buffer is not empty
+void _clearInputBuffer()
+{
+	char c;
+    do 
+    {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
 }
