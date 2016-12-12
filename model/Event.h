@@ -17,9 +17,6 @@
     +----------------------------+
     |            Event           |
     | +------------------------+ |
-    | |    int id              | |
-    | +------------------------+ |
-    | +------------------------+ |
     | |    char* name          | |
     | +------------------------+ |
     | +------------------------+ |
@@ -45,8 +42,6 @@
 
     typedef struct Event
     {
-        //A rendezvény sorszáma
-        int id;
         //A rendezvény neve
         char name[100];
         //Felvett látogatók száma
@@ -61,7 +56,7 @@
     static const int defaultArraySize = 5;
 
     //Új esemény létrehozásához
-    struct Event* newEvent(int, char*);
+    struct Event* newEvent(char*);
 
     //Látogató hozzáadását teszi lehetőve az eseményhez
     /*	Ha a tömb betelt, akkor dupla méretűt deklarálunk, átmásoljuk az adatokat

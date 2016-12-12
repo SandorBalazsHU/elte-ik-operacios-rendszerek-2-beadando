@@ -49,12 +49,12 @@ Events* eventsReaderForBinFiles(FILE* f)
 		int size;
 		fread(&size,sizeof(size),1,f);
 		int i;
-		for(i = 0; i<size; ++i) addEventToEvents(events, eventReaderForBinFiles(f, i));
+		for(i = 0; i<size; ++i) addEventToEvents(events, eventReaderForBinFiles(f));
 	}
 	return events;
 }
 
-Event* eventReaderForBinFiles(FILE* f, int id)
+Event* eventReaderForBinFiles(FILE* f)
 {
     int size;
     fread(&size,sizeof(size), 1, f);
@@ -63,17 +63,17 @@ Event* eventReaderForBinFiles(FILE* f, int id)
     char name[nameSize+1];
     fread(name, nameSize+1, 1, f);
 
-    Event* event = newEvent(id, name);
+    Event* event = newEvent(name);
 
     int i;
     for(i = 0; i<size; ++i)
     {
-        addVisitorToEvent(event, visitorReaderForBinFiles(f, i));
+        addVisitorToEvent(event, visitorReaderForBinFiles(f));
     }
     return event;
 }
 
-Visitor* visitorReaderForBinFiles(FILE* f, int id)
+Visitor* visitorReaderForBinFiles(FILE* f)
 {
     int nameSize;
     fread(&nameSize,sizeof(nameSize), 1, f);
@@ -86,7 +86,7 @@ Visitor* visitorReaderForBinFiles(FILE* f, int id)
     time_t date;
     fread(&date, sizeof(date), 1, f);
 
-    Visitor* visitor = newVisitor(id, name, email, date);
+    Visitor* visitor = newVisitor(name, email, date);
 
     return visitor;
 }

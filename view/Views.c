@@ -12,7 +12,7 @@
 #include "ConsoleIO.h"
 #include "../model/Events.h"
 
-int View1(Events* events)
+int view1(Events* events, FILE* datafile)
 {
     clearScrean();
     printIntro();
@@ -27,9 +27,9 @@ int View1(Events* events)
 
     switch(selectedMainMenuitem)
     {
-        case '1' : View2(events);
+        case '1' : view2(events, datafile);
         break;
-        case '2' : View3();
+        case '2' : view3(events, datafile);
         break;
         case '3' : return 0;
         break;
@@ -37,10 +37,9 @@ int View1(Events* events)
     }
 }
 
-int View2(Events* events)
+void view2(Events* events, FILE* datafile)
 {
     clearScrean();
-    printf("\n" );
     printIntro();
     printHeader("Jelentkezés");
     if(events->size > 0)
@@ -63,12 +62,14 @@ int View2(Events* events)
         switch(selectedMainMenuitem)
         {
             case '1' :
+                addVisitorToEvent(getEventFromEventsById(events, eventID), newVisitor(name, email, getDate()));
+                eventsWriterForBinFiles(events, datafile);
                 printMessage("Jelentkezésed elmentettük!");
                 sleep(sleepTime);
-                View1(events);
+                view1(events, datafile);
             break;
             case '2' : 
-                View1(events);
+                view1(events, datafile);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -77,13 +78,45 @@ int View2(Events* events)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        View1(events);
+        view1(events, datafile);
     }
 }
 
-int View3()
+void view3(Events* events, FILE* datafile)
 {
     clearScrean();
     printIntro();
-    errorMessage("Hiba a menüben!\n");
+    printHeader("Adminisztráció");
+
+    char* subMenu[4];
+    subMenu[0] = "Vendéglista         ";
+    subMenu[1] = "Rendezvényszervezés ";
+    subMenu[2] = "Rendezvénytörlés    ";
+    subMenu[3] = "Vissza              ";
+    printMenu(subMenu, 4);
+
+    char selectedMainMenuitem = menuGenerator("1234");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' : view4();
+        break;
+        case '2' : view5();
+        break;
+        case '3' : view6();
+        break;
+        case '4' : view1(events, datafile);
+        break;
+        default : errorMessage("Hiba a menüben!\n" );
+    }
+}
+
+void view4()
+{
+}
+void view5()
+{
+}
+void view6()
+{
 }

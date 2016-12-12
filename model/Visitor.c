@@ -14,10 +14,9 @@
 #include "./Visitor.h"
 
 //Új látogató létrehozása
-struct Visitor* newVisitor(int id, char* name, char* mail, time_t date)
+struct Visitor* newVisitor(char* name, char* mail, time_t date)
 {
     struct Visitor* _this = malloc(sizeof(struct Visitor));
-    _this->id=id;
     strcpy(_this->name, name);
     strcpy(_this->email, mail);
     _this->date=date;

@@ -84,7 +84,7 @@ int testVisitor()
 {
     printf("\n-testVisitor-+\n");
 
-    Visitor* visitor1 = newVisitor(0, "visitor1", "visitor1@mail.org", getDate());
+    Visitor* visitor1 = newVisitor("visitor1", "visitor1@mail.org", getDate());
     printf("             |-> newVisitor - %sOK%s\n", FontGreen, ColorClear);
 
     freeVisitor(visitor1);
@@ -95,12 +95,12 @@ int testVisitor()
 int testEvent(int n)
 {
     printf("\n-testEvent---%i--+\n", n);
-    Event* event1 = newEvent(0,"event1");
+    Event* event1 = newEvent("event1");
     printf("                |-> newEvent - %sOK%s\n", FontGreen, ColorClear);
     int i;
         for(i = 0; i < n; ++i)
         {
-            Visitor* visitor = newVisitor(i, "visitor", "visitor@mail.org", getDate());
+            Visitor* visitor = newVisitor("visitor", "visitor@mail.org", getDate());
             printf("                |-> newVisitor %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
             addVisitorToEvent(event1, visitor);
             printf("                |-> addVisitorToEvent %i - %sOK%s\n", (i+1), FontGreen, ColorClear);
@@ -129,12 +129,12 @@ int testEvents(int n, int m)
     int i;
     for(i = 0; i < n; ++i)
     {
-        Event* event = newEvent(i,"event");
+        Event* event = newEvent("event");
         printf("                  |-> newEvent-%i---%sOK%s-+ \n", (i+1), FontGreen, ColorClear);
         int j;
         for(j = 0; j < m; ++j)
         {
-            Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
+            Visitor* visitor = newVisitor("visitor", "visitor@mail.org", getDate());
             printf("                  |                   |-> newVisitor %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
             addVisitorToEvent(event, visitor);
             printf("                  |                   |-> addVisitorToEvent %i - %sOK%s\n", (j+1), FontGreen, ColorClear);
@@ -158,12 +158,12 @@ int testPrintEvents(int n, int m)
         int randomStringLenght = 1+rand()%50;
         char randomString[randomStringLenght+2];
 		spacerGenerator(randomString, '*', randomStringLenght);
-        Event* event = newEvent(i,randomString);
+        Event* event = newEvent(randomString);
         int j;
         int randomVisitorNumber = rand()%m;
         for(j = 0; j < randomVisitorNumber; ++j)
         {
-            Visitor* visitor = newVisitor(j, "visitor", "visitor@mail.org", getDate());
+            Visitor* visitor = newVisitor("visitor", "visitor@mail.org", getDate());
             addVisitorToEvent(event, visitor);
         }
         addEventToEvents(events, event);
@@ -177,7 +177,7 @@ int testPrintVisitors(int n)
     srand(time(NULL));
     printf("\n-testPrintVisitors---%i-+\n", n);
     Events* events = newEvents();
-    Event* event = newEvent(0,"árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
+    Event* event = newEvent("árvíztűrőtükörfúrógép - ÁRVÍZTŰRŐTÜKÖRFÚRÓGÉP");
     int i;
     for(i = 0; i < n; ++i)
     {
@@ -189,7 +189,7 @@ int testPrintVisitors(int n)
         spacerGenerator(randomEmail, '*', randomEmailLenght);
         //strcat(randomEmail,"@mail.org");
 
-        Visitor* visitor = newVisitor(i, randomName, randomEmail, getDate());
+        Visitor* visitor = newVisitor(randomName, randomEmail, getDate());
         addVisitorToEvent(event, visitor);
     }
     addEventToEvents(events, event);

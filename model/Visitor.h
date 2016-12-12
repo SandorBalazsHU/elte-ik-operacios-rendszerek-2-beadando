@@ -16,9 +16,6 @@
     +--------------------------------+
     |             Visitor            |
     |     +--------------------+     |
-    |     | int id             |     |
-    |     +--------------------+     |
-    |     +--------------------+     |
     |     | char* name         |     |
     |     +--------------------+     |
     |     +--------------------+     |
@@ -33,8 +30,6 @@
 
     typedef struct Visitor
     {
-        //A látogató sorszáma
-        int id;
         //A látogató neve
         char name[100];
         //A látogató e-mail címe
@@ -44,7 +39,7 @@
     }Visitor;
 
     //Új látogató létrehozása
-    struct Visitor* newVisitor(int, char*, char*, time_t);
+    struct Visitor* newVisitor(char*, char*, time_t);
 
     //A Visitor típus destruktora
     void freeVisitor(Visitor*);

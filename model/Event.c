@@ -14,10 +14,9 @@
 #include "./Visitor.h"
 
 //Új üres esemény
-struct Event* newEvent(int id, char* name)
+struct Event* newEvent(char* name)
 {
 	struct Event* _this = malloc(sizeof(struct Event));
-	_this->id = id;
 	strcpy(_this->name, name);
 	_this->size = 0;
 	_this->_realSize = defaultArraySize;

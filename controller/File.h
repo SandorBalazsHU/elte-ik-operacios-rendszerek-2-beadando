@@ -16,9 +16,9 @@
     void eventsWriterForBinFiles(Events*, FILE*);
     void eventWriterForBinFiles(Event*, FILE*);
     void visitorWriterForBinFiles(Visitor*, FILE*);
-    Events* eventsReaderForBinFiles(FILE* f);
-    Event* eventReaderForBinFiles(FILE*, int);
-    Visitor* visitorReaderForBinFiles(FILE*, int);
+    Events* eventsReaderForBinFiles(FILE*);
+    Event* eventReaderForBinFiles(FILE*);
+    Visitor* visitorReaderForBinFiles(FILE*);
     FILE* openBinFileForRead(const char*);
     FILE* openBinFileForWrite(const char*);
     int getFileSize(FILE* f);
