@@ -121,8 +121,7 @@ void view4(Events* events, FILE* datafile)
         printEvents(events);
 
         _clearInputBuffer();
-        int id = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)");
-        Event* event = getEventFromEventsById(events, id-1);
+        int eventId = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)");
 
         char* subMenu[1];
         subMenu[0] = "Listáz              ";
@@ -133,7 +132,7 @@ void view4(Events* events, FILE* datafile)
 
         switch(selectedMainMenuitem)
         {
-            case '1' : view7(events, event, datafile);
+            case '1' : view7(events, eventId, datafile);
             break;
             case '2' : view3(events, datafile);
             break;
@@ -212,12 +211,12 @@ void view6(Events* events, FILE* datafile)
     }
 }
 
-void view7(Events* events, int eventId FILE* datafile)
+void view7(Events* events, int eventId, FILE* datafile)
 {
     clearScrean();
     printIntro();
     printHeader("Vendéglista");
-    printVisitors(getEventFromEventsById(events, eventId));
+    printVisitors(events, eventId-1);
 
     char* subMenu[4];
     subMenu[0] = "Vendégmódosítás     ";
