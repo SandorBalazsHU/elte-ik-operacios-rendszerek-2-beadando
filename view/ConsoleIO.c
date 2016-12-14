@@ -109,7 +109,7 @@ char menuGenerator(char* menuItems)
 	{
 		if ((selectedMenuItem != '~') && ( selectedMenuItem != '\n') && ( state == 0))
 		{
-			printf("      %s%s+ Hibás érték!%s Add meg újra: ", FontWhite, FontBackRed, ColorClear);
+			printf("      + %s%sHibás érték!%s Add meg újra: ", FontWhite, FontBackRed, ColorClear);
 			state++;
 		}
 		selectedMenuItem = getchar();
@@ -282,14 +282,13 @@ int readIntFromConsole(char* label, int range)
 	readFromConsole(inputString, label);
 	int readedNumber = 0;
 	char *garbage = NULL;
-	readedNumber = strtol(inputString, &garbage, range);
+	readedNumber = strtol(inputString, &garbage, range+1);
 	while(readedNumber == 0)
 	{
 		errorMessage("Hibás bemenet! Add meg újra!");
 		readFromConsole(inputString, label);
-		readedNumber = strtol(inputString, &garbage, range);
+		readedNumber = strtol(inputString, &garbage, range+1);
 	}
-	printf("----%i\n", readedNumber);
 	return readedNumber;
 }
 
