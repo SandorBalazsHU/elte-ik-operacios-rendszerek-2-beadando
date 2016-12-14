@@ -274,7 +274,7 @@ char* readFromConsole(char* inputString, char* label)
 }
 int readIntFromConsole(char* label)
 {
-	return 0;
+	return 1;
 }
 
 // works only if the input buffer is not empty

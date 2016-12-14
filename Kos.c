@@ -16,12 +16,13 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    FILE* datafile = openBinFileForRead(_dataFileName);
-    Events* events = eventsReaderForBinFiles(datafile);
-    fclose(datafile);
+    FILE* datafileForRead = openBinFileForRead(_dataFileName);
+    Events* events = eventsReaderForBinFiles(datafileForRead);
+    fclose(datafileForRead);
 
     //Ha nem a teszteket futtatjuk akkor kitesszük az első nézetet.
-    view1(events, datafile);
+    FILE* datafileForWrite = openBinFileForWrite(_dataFileName);
+    view1(events, datafileForWrite);
 
     return 0;
 }

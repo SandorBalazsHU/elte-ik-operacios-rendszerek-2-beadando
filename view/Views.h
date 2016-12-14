@@ -19,6 +19,8 @@
     void view4(Events*, FILE*);
     void view5(Events*, FILE*);
     void view6(Events*, FILE*);
-    void view7(Event*);
+    void view7(Events*, int, FILE*);
+    void view8(Events*, FILE*);
+    void view9(Events*, FILE*);
 
 #endif

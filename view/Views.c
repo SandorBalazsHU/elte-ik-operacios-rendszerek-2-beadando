@@ -133,9 +133,9 @@ void view4(Events* events, FILE* datafile)
 
         switch(selectedMainMenuitem)
         {
-            case '1' : view7(event);
+            case '1' : view7(events, event, datafile);
             break;
-            case '2' : view1(events, datafile);
+            case '2' : view3(events, datafile);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -212,7 +212,42 @@ void view6(Events* events, FILE* datafile)
     }
 }
 
-void view7(Event* event)
+void view7(Events* events, int eventId FILE* datafile)
+{
+    clearScrean();
+    printIntro();
+    printHeader("Vendéglista");
+    printVisitors(getEventFromEventsById(events, eventId));
+
+    char* subMenu[4];
+    subMenu[0] = "Vendégmódosítás     ";
+    subMenu[1] = "Vendégtörlés        ";
+    subMenu[2] = "Mentés              ";
+    subMenu[3] = "Vissza              ";
+    printMenu(subMenu, 4);
+
+    char selectedMainMenuitem = menuGenerator("1234");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' : view8(events, datafile);
+        break;
+        case '2' : view9(events, datafile);
+        break;
+        case '3' : view4(events, datafile);
+        break;
+        case '4' : view4(events, datafile);
+        break;
+        default : errorMessage("Hiba a menüben!\n" );
+    }
+}
+
+void view8(Events* events, FILE* datafile)
+{
+
+}
+
+void view9(Events* events, FILE* datafile)
 {
 
 }

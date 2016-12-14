@@ -114,7 +114,7 @@ Menürendszer:
                                   |->-Mentés    --> VIEW7
                                   |->-Mégse     --> VIEW7
     Vendégtörlés ->- FROM: VIEW7
-    6.) +-VIEW6
+    9.) +-VIEW6
         |-CLEAR
         |-INTRO
         |-HEADER
