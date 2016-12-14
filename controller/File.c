@@ -14,78 +14,82 @@
 #include "../model/Event.h"
 #include "../model/Visitor.h"
 
-void eventsWriterForBinFiles(Events* events, FILE* f)
+void eventsWriterForBinFiles(Events* events)
 {
-    fwrite(&events->size, sizeof(events->size), 1, f);
+    FILE* datafileForWrite = openBinFileForWrite(_dataFileName);
+    fwrite(&events->size, sizeof(events->size), 1, datafileForWrite);
     int i;
-    for(i = 0; i<events->size; ++i) eventWriterForBinFiles(getEventFromEventsById(events, i), f);
+    for(i = 0; i<events->size; ++i) eventWriterForBinFiles(getEventFromEventsById(events, i), datafileForWrite);
+    fclose(datafileForWrite);
 }
 
-void eventWriterForBinFiles(Event* event, FILE* f)
+void eventWriterForBinFiles(Event* event, FILE* datafileForWrite)
 {
-    fwrite(&event->size, sizeof(event->size), 1, f);
+    fwrite(&event->size, sizeof(event->size), 1, datafileForWrite);
     int nameSize = (int) strlen(event->name);
-    fwrite(&nameSize, sizeof(nameSize), 1, f);
-    fwrite(event->name, sizeof(char), nameSize+1, f);
+    fwrite(&nameSize, sizeof(nameSize), 1, datafileForWrite);
+    fwrite(event->name, sizeof(char), nameSize+1, datafileForWrite);
     int i;
-    for(i = 0; i<event->size; ++i)visitorWriterForBinFiles(getVisitorFromEventById(event, i), f);
+    for(i = 0; i<event->size; ++i)visitorWriterForBinFiles(getVisitorFromEventById(event, i), datafileForWrite);
 }
 
-void visitorWriterForBinFiles(Visitor* visitor, FILE* f)
+void visitorWriterForBinFiles(Visitor* visitor, FILE* datafileForWrite)
 {
     int nameSize = (int) strlen(visitor->name);
-    fwrite(&nameSize, sizeof(nameSize), 1, f);
-    fwrite(visitor->name, sizeof(char), nameSize+1, f);
+    fwrite(&nameSize, sizeof(nameSize), 1, datafileForWrite);
+    fwrite(visitor->name, sizeof(char), nameSize+1, datafileForWrite);
     int emailSize = (int) strlen(visitor->email);
-    fwrite(&emailSize, sizeof(emailSize), 1, f);
-    fwrite(visitor->email, sizeof(char), emailSize+1, f);
-    fwrite(&visitor->date, sizeof(&visitor->date), 1, f);
+    fwrite(&emailSize, sizeof(emailSize), 1, datafileForWrite);
+    fwrite(visitor->email, sizeof(char), emailSize+1, datafileForWrite);
+    fwrite(&visitor->date, sizeof(&visitor->date), 1, datafileForWrite);
 }
 
-Events* eventsReaderForBinFiles(FILE* f)
+Events* eventsReaderForBinFiles()
 {
+    FILE* datafileForRead = openBinFileForRead(_dataFileName);
     Events* events = newEvents();
-	if(getFileSize(f) > 0)
+	if(getFileSize(datafileForRead) > 0)
 	{
 		int size;
-		fread(&size,sizeof(size),1,f);
+		fread(&size,sizeof(size),1,datafileForRead);
 		int i;
-		for(i = 0; i<size; ++i) addEventToEvents(events, eventReaderForBinFiles(f));
+		for(i = 0; i<size; ++i) addEventToEvents(events, eventReaderForBinFiles(datafileForRead));
 	}
+    fclose(datafileForRead);
 	return events;
 }
 
-Event* eventReaderForBinFiles(FILE* f)
+Event* eventReaderForBinFiles(FILE* datafileForRead)
 {
     int size;
-    fread(&size,sizeof(size), 1, f);
+    fread(&size,sizeof(size), 1, datafileForRead);
     int nameSize;
-    fread(&nameSize,sizeof(nameSize), 1, f);
+    fread(&nameSize,sizeof(nameSize), 1, datafileForRead);
     char name[nameSize+1];
-    fread(name, nameSize+1, 1, f);
+    fread(name, sizeof(char), nameSize+1, datafileForRead);
 
     Event* event = newEvent(name);
 
     int i;
     for(i = 0; i<size; ++i)
     {
-        addVisitorToEvent(event, visitorReaderForBinFiles(f));
+        addVisitorToEvent(event, visitorReaderForBinFiles(datafileForRead));
     }
     return event;
 }
 
-Visitor* visitorReaderForBinFiles(FILE* f)
+Visitor* visitorReaderForBinFiles(FILE* datafileForRead)
 {
     int nameSize;
-    fread(&nameSize,sizeof(nameSize), 1, f);
+    fread(&nameSize,sizeof(nameSize), 1, datafileForRead);
     char name[nameSize+1];
-    fread(name, nameSize+1, 1, f);
+    fread(name, sizeof(char), nameSize+1, datafileForRead);
     int emailSize;
-    fread(&emailSize,sizeof(emailSize), 1, f);
+    fread(&emailSize,sizeof(emailSize), 1, datafileForRead);
     char email[emailSize+1];
-    fread(email, emailSize+1, 1, f);
+    fread(email, sizeof(char), emailSize+1, datafileForRead);
     time_t date;
-    fread(&date, sizeof(date), 1, f);
+    fread(&date, sizeof(date), 1, datafileForRead);
 
     Visitor* visitor = newVisitor(name, email, date);
 

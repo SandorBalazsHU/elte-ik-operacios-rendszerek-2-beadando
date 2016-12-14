@@ -13,14 +13,15 @@
     #include "../model/Event.h"
     #include "../model/Visitor.h"
 
-    void eventsWriterForBinFiles(Events*, FILE*);
+    static const char _dataFileName[] = "kos.data";
+    void eventsWriterForBinFiles(Events*);
     void eventWriterForBinFiles(Event*, FILE*);
     void visitorWriterForBinFiles(Visitor*, FILE*);
-    Events* eventsReaderForBinFiles(FILE*);
+    Events* eventsReaderForBinFiles();
     Event* eventReaderForBinFiles(FILE*);
     Visitor* visitorReaderForBinFiles(FILE*);
     FILE* openBinFileForRead(const char*);
     FILE* openBinFileForWrite(const char*);
-    int getFileSize(FILE* f);
+    int getFileSize(FILE*);
 
 #endif

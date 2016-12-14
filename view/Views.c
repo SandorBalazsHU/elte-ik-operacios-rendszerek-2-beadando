@@ -12,7 +12,7 @@
 #include "ConsoleIO.h"
 #include "../model/Events.h"
 
-int view1(Events* events, FILE* datafile)
+int view1(Events* events)
 {
     clearScrean();
     printIntro();
@@ -27,9 +27,9 @@ int view1(Events* events, FILE* datafile)
 
     switch(selectedMainMenuitem)
     {
-        case '1' : view2(events, datafile);
+        case '1' : view2(events);
         break;
-        case '2' : view3(events, datafile);
+        case '2' : view3(events);
         break;
         case '3' : return 0;
         break;
@@ -37,7 +37,7 @@ int view1(Events* events, FILE* datafile)
     }
 }
 
-void view2(Events* events, FILE* datafile)
+void view2(Events* events)
 {
     clearScrean();
     printIntro();
@@ -64,12 +64,12 @@ void view2(Events* events, FILE* datafile)
         {
             case '1' :
                 addVisitorToEvent(getEventFromEventsById(events, eventID-1), newVisitor(name, email, getDate()));
-                eventsWriterForBinFiles(events, datafile);
+                eventsWriterForBinFiles(events);
                 printMessage("Jelentkezésed elmentettük!");
                 sleep(sleepTime);
-                view1(events, datafile);
+                view1(events);
             break;
-            case '2' : view1(events, datafile);
+            case '2' : view1(events);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -78,11 +78,11 @@ void view2(Events* events, FILE* datafile)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        view1(events, datafile);
+        view1(events);
     }
 }
 
-void view3(Events* events, FILE* datafile)
+void view3(Events* events)
 {
     clearScrean();
     printIntro();
@@ -99,19 +99,19 @@ void view3(Events* events, FILE* datafile)
 
     switch(selectedMainMenuitem)
     {
-        case '1' : view4(events, datafile);
+        case '1' : view4(events);
         break;
-        case '2' : view5(events, datafile);
+        case '2' : view5(events);
         break;
-        case '3' : view6(events, datafile);
+        case '3' : view6(events);
         break;
-        case '4' : view1(events, datafile);
+        case '4' : view1(events);
         break;
         default : errorMessage("Hiba a menüben!\n" );
     }
 }
 
-void view4(Events* events, FILE* datafile)
+void view4(Events* events)
 {
     clearScrean();
     printIntro();
@@ -132,9 +132,9 @@ void view4(Events* events, FILE* datafile)
 
         switch(selectedMainMenuitem)
         {
-            case '1' : view7(events, eventId, datafile);
+            case '1' : view7(events, eventId);
             break;
-            case '2' : view3(events, datafile);
+            case '2' : view3(events);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -143,10 +143,10 @@ void view4(Events* events, FILE* datafile)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        view1(events, datafile);
+        view1(events);
     }
 }
-void view5(Events* events, FILE* datafile)
+void view5(Events* events)
 {
     clearScrean();
     printIntro();
@@ -165,15 +165,15 @@ void view5(Events* events, FILE* datafile)
     switch(selectedMainMenuitem)
     {
         case '1' : 
-            eventsWriterForBinFiles(addEventToEvents(events, newEvent(name)), datafile);
-            view3(events, datafile);
+            eventsWriterForBinFiles(addEventToEvents(events, newEvent(name)));
+            view3(events);
         break;
-        case '2' : view3(events, datafile);
+        case '2' : view3(events);
         break;
         default : errorMessage("Hiba a menüben!\n" );
     }
 }
-void view6(Events* events, FILE* datafile)
+void view6(Events* events)
 {
     clearScrean();
     printIntro();
@@ -195,10 +195,10 @@ void view6(Events* events, FILE* datafile)
         switch(selectedMainMenuitem)
         {
             case '1' : 
-                eventsWriterForBinFiles(deleteEventFromEventsById(events, id-1), datafile);
-                view3(events, datafile);
+                eventsWriterForBinFiles(deleteEventFromEventsById(events, id-1));
+                view3(events);
             break;
-            case '2' : view3(events, datafile);
+            case '2' : view3(events);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -207,11 +207,11 @@ void view6(Events* events, FILE* datafile)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        view1(events, datafile);
+        view1(events);
     }
 }
 
-void view7(Events* events, int eventId, FILE* datafile)
+void view7(Events* events, int eventId)
 {
     clearScrean();
     printIntro();
@@ -229,24 +229,24 @@ void view7(Events* events, int eventId, FILE* datafile)
 
     switch(selectedMainMenuitem)
     {
-        case '1' : view8(events, datafile);
+        case '1' : view8(events);
         break;
-        case '2' : view9(events, datafile);
+        case '2' : view9(events);
         break;
-        case '3' : view4(events, datafile);
+        case '3' : view4(events);
         break;
-        case '4' : view4(events, datafile);
+        case '4' : view4(events);
         break;
         default : errorMessage("Hiba a menüben!\n" );
     }
 }
 
-void view8(Events* events, FILE* datafile)
+void view8(Events* events)
 {
 
 }
 
-void view9(Events* events, FILE* datafile)
+void view9(Events* events)
 {
 
 }

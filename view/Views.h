@@ -13,14 +13,14 @@
 #include "../model/Events.h"
 
     #define sleepTime 2
-    int  view1(Events*, FILE*);
-    void view2(Events*, FILE*);
-    void view3(Events*, FILE*);
-    void view4(Events*, FILE*);
-    void view5(Events*, FILE*);
-    void view6(Events*, FILE*);
-    void view7(Events*, int, FILE*);
-    void view8(Events*, FILE*);
-    void view9(Events*, FILE*);
+    int  view1(Events*);
+    void view2(Events*);
+    void view3(Events*);
+    void view4(Events*);
+    void view5(Events*);
+    void view6(Events*);
+    void view7(Events*, int);
+    void view8(Events*);
+    void view9(Events*);
 
 #endif

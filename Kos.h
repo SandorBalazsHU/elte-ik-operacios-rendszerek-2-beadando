@@ -9,8 +9,6 @@
 #ifndef KOS_H
 #define KOS_H
 
-static const char _dataFileName[] = "kos.data";
-
 //A konzolkezelő függvények gyűjteménye
 #include "./view/ConsoleIO.h"
 
