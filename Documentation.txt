@@ -60,7 +60,7 @@ Menürendszer:
         |-CLEAR 
         |-INTRO
         |-HEADER
-        |-LIST VISITORS
+        |-LIST EVENTS
         |-INPUT FORM:+
         |            |-<-EVENTID
         |			 
@@ -87,18 +87,19 @@ Menürendszer:
         |            |-<-EVENTID
         |			 
         |-SUB MENU:+
-                   |->-Listáz    --> VIEW7
-                   |->-Vissza    --> VIEW3
+                   |->-Törlés    --> VIEW3
+                   |->-Mégse     --> VIEW3
     Listáz (Vendégeket)  ->- FROM: VIEW4
     7.) +-VIEW7
         |-CLEAR
         |-INTRO
         |-HEADER
+        |-LIST VISITORS
         |-SUB MENU:+
                    |->-Vendégmódosítás    --> VIEW8
                    |->-Vendégtörlés       --> VIEW9
                    |->-Mentés             --> VIEW4
-                  |->-Mégse              --> VIEW4
+                   |->-Mégse              --> VIEW4
     Vendégmódosítás ->- FROM: VIEW7
     8.) +-VIEW7
         |-CLEAR

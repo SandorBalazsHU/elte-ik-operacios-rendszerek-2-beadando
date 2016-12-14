@@ -259,19 +259,22 @@ void errorMessage(char* errorMessageText)
 	printf("- %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
 }
 
-char* readFromConsole(char* label, int inputLimit)
+char* readFromConsole(char* inputString, char* label)
 {
 	printf("%s+ %s: %s",FontGreen, label, ColorClear);
-	char text[inputLimit];
 	int i = 0;
 	char c;
-	while ((c = getchar()) != '\n' && c != EOF && i <= inputLimit)
+	while ((c = getchar()) != '\n' && c != EOF)
 	{
-		text[i] = c;
+		inputString[i] = c;
 		++i;
 	}
-	text[i] = '\0';
-	return text;
+	inputString[i] = '\0';
+	return inputString;
+}
+int readIntFromConsole(char* label)
+{
+	return 0;
 }
 
 // works only if the input buffer is not empty

@@ -28,7 +28,7 @@ struct Events* newEvents()
 //Esemény hozzáadását teszi lehetőve az eseménytárolóhoz
 /*	Ha a tömb betelt, akkor dupla méretűt deklarálunk, átmásoljuk az adatokat
  és a régit töröljük a C++ STD Vector mintájára.*/
-int addEventToEvents(Events* events, Event* event)
+struct Events* addEventToEvents(Events* events, Event* event)
 {
 	int i;
 	
@@ -58,12 +58,12 @@ int addEventToEvents(Events* events, Event* event)
 		events->eventsArray[events->size] = event;
 		events->size++;
 	}
-	return 0;
+	return events;
 }
 
 
 //Esemény törlése az eseménytárolóból
-int deleteEventFromEvents(Events* events, Event* event)
+struct Events* deleteEventFromEvents(Events* events, Event* event)
 {
 	int i, l = 0;
 	Event**  _eventsArray = malloc(events -> _realSize * sizeof(Event*));
@@ -84,10 +84,35 @@ int deleteEventFromEvents(Events* events, Event* event)
 	free(arr);
 	events -> eventsArray = _eventsArray;
 	events->size--;
-	return 0;
+	return events;
 }
 
-Event* getEventFromEventsById(Events* events, int id){
+//Esemény törlése az eseménytárolóból
+struct Events* deleteEventFromEventsById(Events* events, int id)
+{
+	int i, l = 0;
+	Event**  _eventsArray = malloc(events -> _realSize * sizeof(Event*));
+	for(i = 0; i < events->size; ++i)
+	{
+		if(i != id)
+		{
+			_eventsArray[l] = events->eventsArray[i];
+		}
+		else
+		{
+			l = i-1;
+			freeEvent(events->eventsArray[i]);
+		}
+		++l;
+	}
+	Event** arr = events -> eventsArray;
+	free(arr);
+	events -> eventsArray = _eventsArray;
+	events->size--;
+	return events;
+}
+
+struct Event* getEventFromEventsById(Events* events, int id){
 	return events->eventsArray[id];
 }
 

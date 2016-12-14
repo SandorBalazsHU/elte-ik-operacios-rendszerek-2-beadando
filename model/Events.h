@@ -56,12 +56,14 @@
     //Esemény hozzáadását teszi lehetőve az eseménytárolóhoz
     /*	Ha a tömb betelt, akkor dupla méretűt deklarálunk, átmásoljuk az adatokat
     és a régit töröljük a C++ STD Vector mintájára.*/
-    int addEventToEvents(Events*, Event*);
+    struct Events* addEventToEvents(Events*, Event*);
     
-    Event* getEventFromEventsById(Events*, int);
+    struct Event* getEventFromEventsById(Events*, int);
 
     //Esemény törlése az eseménytárolóból
-    int deleteEventFromEvents(Events*, Event*);
+    struct Events* deleteEventFromEvents(Events*, Event*);
+
+    struct Events* deleteEventFromEventsById(Events*, int);
 
     /*Az Events típus destruktora
     Kell destrukfor, mivel az eventArray külön álló egységet képez a memóriában

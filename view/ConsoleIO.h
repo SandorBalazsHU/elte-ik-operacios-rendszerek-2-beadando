@@ -73,10 +73,12 @@
 
     void printHeader(char*);
 
-    char* readFromConsole(char* , int);
+    char* readFromConsole(char*, char*);
 
     void _clearInputBuffer();
 
     int numPlaces (int n);
+
+    int readIntFromConsole(char*);
 
 #endif

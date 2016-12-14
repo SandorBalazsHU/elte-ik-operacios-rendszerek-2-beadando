@@ -47,10 +47,11 @@ void view2(Events* events, FILE* datafile)
         printEvents(events);
 
         _clearInputBuffer();
-        int inputLimit = 200;
-        char* name = readFromConsole("Név", inputLimit);
-        char* email = readFromConsole("E-mail", inputLimit);
-        char* eventID = readFromConsole("A választott rendezvény száma", inputLimit);
+        char name[100];
+        readFromConsole(name, "Név");
+        char email[100];
+        readFromConsole(email, "E-mail");
+        int eventID = readIntFromConsole("A választott rendezvény száma");
 
         char* subMenu[1];
         subMenu[0] = "Mentés              ";
@@ -62,14 +63,13 @@ void view2(Events* events, FILE* datafile)
         switch(selectedMainMenuitem)
         {
             case '1' :
-                addVisitorToEvent(getEventFromEventsById(events, eventID), newVisitor(name, email, getDate()));
+                addVisitorToEvent(getEventFromEventsById(events, eventID-1), newVisitor(name, email, getDate()));
                 eventsWriterForBinFiles(events, datafile);
                 printMessage("Jelentkezésed elmentettük!");
                 sleep(sleepTime);
                 view1(events, datafile);
             break;
-            case '2' : 
-                view1(events, datafile);
+            case '2' : view1(events, datafile);
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
@@ -99,11 +99,11 @@ void view3(Events* events, FILE* datafile)
 
     switch(selectedMainMenuitem)
     {
-        case '1' : view4();
+        case '1' : view4(events, datafile);
         break;
-        case '2' : view5();
+        case '2' : view5(events, datafile);
         break;
-        case '3' : view6();
+        case '3' : view6(events, datafile);
         break;
         case '4' : view1(events, datafile);
         break;
@@ -111,12 +111,108 @@ void view3(Events* events, FILE* datafile)
     }
 }
 
-void view4()
+void view4(Events* events, FILE* datafile)
 {
+    clearScrean();
+    printIntro();
+    printHeader("Vendéglista");
+    if(events->size > 0)
+    {
+        printEvents(events);
+
+        _clearInputBuffer();
+        int id = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)");
+        Event* event = getEventFromEventsById(events, id-1);
+
+        char* subMenu[1];
+        subMenu[0] = "Listáz              ";
+        subMenu[1] = "Vissza              ";
+        printMenu(subMenu, 2);
+
+        char selectedMainMenuitem = menuGenerator("12");
+
+        switch(selectedMainMenuitem)
+        {
+            case '1' : view7(event);
+            break;
+            case '2' : view1(events, datafile);
+            break;
+            default : errorMessage("Hiba a menüben!\n" );
+        }
+    }
+    else
+    {
+        printMessage("Nincsenek események!");
+        sleep(sleepTime);
+        view1(events, datafile);
+    }
 }
-void view5()
+void view5(Events* events, FILE* datafile)
 {
+    clearScrean();
+    printIntro();
+    printHeader("Rendezvényszervezés");
+    _clearInputBuffer();
+
+    char name[100];
+    readFromConsole(name, "A létrehozandó rendezvény veve");
+    char* subMenu[1];
+    subMenu[0] = "Mentés              ";
+    subMenu[1] = "Mégse               ";
+    printMenu(subMenu, 2);
+
+    char selectedMainMenuitem = menuGenerator("12");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' : 
+            eventsWriterForBinFiles(addEventToEvents(events, newEvent(name)), datafile);
+            view3(events, datafile);
+        break;
+        case '2' : view3(events, datafile);
+        break;
+        default : errorMessage("Hiba a menüben!\n" );
+    }
 }
-void view6()
+void view6(Events* events, FILE* datafile)
 {
+    clearScrean();
+    printIntro();
+    printHeader("Rendezvénytörlés");
+    if(events->size > 0)
+    {
+        printEvents(events);
+
+        _clearInputBuffer();
+        int id = readIntFromConsole("A törölni kívánt rendezvény ID-ja");
+
+        char* subMenu[1];
+        subMenu[0] = "Törlés              ";
+        subMenu[1] = "Mégse               ";
+        printMenu(subMenu, 2);
+
+        char selectedMainMenuitem = menuGenerator("12");
+
+        switch(selectedMainMenuitem)
+        {
+            case '1' : 
+                eventsWriterForBinFiles(deleteEventFromEventsById(events, id-1), datafile);
+                view3(events, datafile);
+            break;
+            case '2' : view3(events, datafile);
+            break;
+            default : errorMessage("Hiba a menüben!\n" );
+        }
+    }
+    else
+    {
+        printMessage("Nincsenek események!");
+        sleep(sleepTime);
+        view1(events, datafile);
+    }
+}
+
+void view7(Event* event)
+{
+
 }

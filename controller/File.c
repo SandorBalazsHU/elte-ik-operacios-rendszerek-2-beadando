@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include "File.h"
 #include "../model/Events.h"
 #include "../model/Event.h"
