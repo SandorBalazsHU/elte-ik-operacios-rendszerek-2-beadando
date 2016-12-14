@@ -16,6 +16,7 @@ int view1(Events* events)
 {
     clearScrean();
     printIntro();
+    if(events->size > 0) printEvents(events); else printMessage("Nincsenek események!");
 
     char* mainMenu[3];
     mainMenu[0] = "Jelentkezés         ";
@@ -45,13 +46,12 @@ void view2(Events* events)
     if(events->size > 0)
     {
         printEvents(events);
-
         _clearInputBuffer();
         char name[100];
         readFromConsole(name, "Név");
         char email[100];
         readFromConsole(email, "E-mail");
-        int eventID = readIntFromConsole("A választott rendezvény száma");
+        int eventID = readIntFromConsole("A választott rendezvény száma", events->size);
 
         char* subMenu[1];
         subMenu[0] = "Mentés              ";
@@ -87,7 +87,7 @@ void view3(Events* events)
     clearScrean();
     printIntro();
     printHeader("Adminisztráció");
-
+    if(events->size > 0) printEvents(events); else printMessage("Nincsenek események!");
     char* subMenu[4];
     subMenu[0] = "Vendéglista         ";
     subMenu[1] = "Rendezvényszervezés ";
@@ -121,7 +121,7 @@ void view4(Events* events)
         printEvents(events);
 
         _clearInputBuffer();
-        int eventId = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)");
+        int eventId = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)", events->size);
 
         char* subMenu[1];
         subMenu[0] = "Listáz              ";
@@ -143,7 +143,7 @@ void view4(Events* events)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        view1(events);
+        view3(events);
     }
 }
 void view5(Events* events)
@@ -166,6 +166,8 @@ void view5(Events* events)
     {
         case '1' : 
             eventsWriterForBinFiles(addEventToEvents(events, newEvent(name)));
+            printMessage("Az új esemény létrejött!");
+            sleep(sleepTime);
             view3(events);
         break;
         case '2' : view3(events);
@@ -183,7 +185,7 @@ void view6(Events* events)
         printEvents(events);
 
         _clearInputBuffer();
-        int id = readIntFromConsole("A törölni kívánt rendezvény ID-ja");
+        int id = readIntFromConsole("A törölni kívánt rendezvény ID-ja", events->size);
 
         char* subMenu[1];
         subMenu[0] = "Törlés              ";
@@ -196,6 +198,8 @@ void view6(Events* events)
         {
             case '1' : 
                 eventsWriterForBinFiles(deleteEventFromEventsById(events, id-1));
+                printMessage("A kiválasztott rendezvényt törtöltük!");
+                sleep(sleepTime);
                 view3(events);
             break;
             case '2' : view3(events);
@@ -207,7 +211,7 @@ void view6(Events* events)
     {
         printMessage("Nincsenek események!");
         sleep(sleepTime);
-        view1(events);
+        view3(events);
     }
 }
 
@@ -216,28 +220,34 @@ void view7(Events* events, int eventId)
     clearScrean();
     printIntro();
     printHeader("Vendéglista");
-    printVisitors(events, eventId-1);
-
-    char* subMenu[4];
-    subMenu[0] = "Vendégmódosítás     ";
-    subMenu[1] = "Vendégtörlés        ";
-    subMenu[2] = "Mentés              ";
-    subMenu[3] = "Vissza              ";
-    printMenu(subMenu, 4);
-
-    char selectedMainMenuitem = menuGenerator("1234");
-
-    switch(selectedMainMenuitem)
+    if(getEventFromEventsById(events, eventId-1)->size > 0)
     {
-        case '1' : view8(events);
-        break;
-        case '2' : view9(events);
-        break;
-        case '3' : view4(events);
-        break;
-        case '4' : view4(events);
-        break;
-        default : errorMessage("Hiba a menüben!\n" );
+        printVisitors(events, eventId-1);
+
+        char* subMenu[4];
+        subMenu[0] = "Vendégmódosítás     ";
+        subMenu[1] = "Vendégtörlés        ";
+        subMenu[2] = "Vissza              ";
+        printMenu(subMenu, 3);
+
+        char selectedMainMenuitem = menuGenerator("123");
+
+        switch(selectedMainMenuitem)
+        {
+            case '1' : view8(events);
+            break;
+            case '2' : view9(events);
+            break;
+            case '3' : view3(events);
+            break;
+            default : errorMessage("Hiba a menüben!\n" );
+        }
+    }
+    else
+    {
+        printMessage("Nincsenek résztvevők az eseményen!");
+        sleep(sleepTime);
+        view3(events);
     }
 }
 

@@ -68,8 +68,8 @@ void printHeader(char* headerText)
 	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 4 - 1;
 	char spacer[position+2];
 	spacerGenerator(spacer, ' ', position);
-
 	printf("%s<-| %s%s%s |->\n", spacer, FontGreen, headerText, ColorClear);
+	printf("\n");
 }
 
 void printMessage(char* headerText)
@@ -78,8 +78,8 @@ void printMessage(char* headerText)
 	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 4 - 1;
 	char spacer[position+2];
 	spacerGenerator(spacer, ' ', position);
-
 	printf("%s<-|%s%s %s %s|->\n", spacer, FontBlack, FontBackYellow, headerText, ColorClear);
+	printf("\n");
 }
 
 //A menü kirajzolása
@@ -109,7 +109,7 @@ char menuGenerator(char* menuItems)
 	{
 		if ((selectedMenuItem != '~') && ( selectedMenuItem != '\n') && ( state == 0))
 		{
-			printf("      %s+%s Hibás érték! Add meg újra: ", FontGreen, ColorClear);
+			printf("      %s%s+ Hibás érték!%s Add meg újra: ", FontWhite, FontBackRed, ColorClear);
 			state++;
 		}
 		selectedMenuItem = getchar();
@@ -256,11 +256,14 @@ int _strlenForUnicode(char* s)
 
 void errorMessage(char* errorMessageText)
 {
-	printf("- %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
+	printf("\n");
+	printf("+ %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
+	printf("\n");
 }
 
 char* readFromConsole(char* inputString, char* label)
 {
+	printf("\n");
 	printf("%s+ %s: %s",FontGreen, label, ColorClear);
 	int i = 0;
 	char c;
@@ -270,11 +273,24 @@ char* readFromConsole(char* inputString, char* label)
 		++i;
 	}
 	inputString[i] = '\0';
+	printf("\n");
 	return inputString;
 }
-int readIntFromConsole(char* label)
+int readIntFromConsole(char* label, int range)
 {
-	return 1;
+	char inputString[100];
+	readFromConsole(inputString, label);
+	int readedNumber = 0;
+	char *garbage = NULL;
+	readedNumber = strtol(inputString, &garbage, range);
+	while(readedNumber == 0)
+	{
+		errorMessage("Hibás bemenet! Add meg újra!");
+		readFromConsole(inputString, label);
+		readedNumber = strtol(inputString, &garbage, range);
+	}
+	printf("----%i\n", readedNumber);
+	return readedNumber;
 }
 
 // works only if the input buffer is not empty

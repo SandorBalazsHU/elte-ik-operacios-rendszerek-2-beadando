@@ -50,6 +50,7 @@ Menürendszer:
         |-CLEAR
         |-INTRO
         |-HEADER
+        |-LIST EVENTS
         |-SUB MENU:+
                    |->-Vendéglista            --> VIEW4
                    |->-Rendezvényszervezés    --> VIEW5
@@ -98,8 +99,7 @@ Menürendszer:
         |-SUB MENU:+
                    |->-Vendégmódosítás    --> VIEW8
                    |->-Vendégtörlés       --> VIEW9
-                   |->-Mentés             --> VIEW4
-                   |->-Mégse              --> VIEW4
+                   |->-Mégse              --> VIEW3
     Vendégmódosítás ->- FROM: VIEW7
     8.) +-VIEW7
         |-CLEAR

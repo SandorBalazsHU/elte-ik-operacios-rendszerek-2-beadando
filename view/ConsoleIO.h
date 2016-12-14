@@ -79,6 +79,6 @@
 
     int numPlaces (int n);
 
-    int readIntFromConsole(char*);
+    int readIntFromConsole(char*, int);
 
 #endif
