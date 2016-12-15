@@ -64,7 +64,9 @@
     int addVisitorToEvent(Event*, Visitor*);
 
     //Látogató törlése az eseményről
-    int deleteVisitorFromEvent(Event*, Visitor*);
+    struct Event* deleteVisitorFromEvent(Event*, Visitor*);
+
+    struct Event* deleteVisitorFromEventById(Event*, int);
 
     //Index szerinti keresés a látogatók között
     struct Visitor* getVisitorFromEventById(Event*, int);

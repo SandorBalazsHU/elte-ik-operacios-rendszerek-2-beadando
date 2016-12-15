@@ -64,7 +64,7 @@ int addVisitorToEvent(Event* event, Visitor* visitor)
 
 
 //Látogató törlése az eseményről
-int deleteVisitorFromEvent(Event* event, Visitor* visitor)
+struct Event* deleteVisitorFromEvent(Event* event, Visitor* visitor)
 {
 	int i, l = 0;
 	Visitor**  _visitorArray = malloc(event -> _realSize * sizeof(Visitor*));
@@ -85,7 +85,32 @@ int deleteVisitorFromEvent(Event* event, Visitor* visitor)
 	free(arr);
 	event -> visitorArray = _visitorArray;
 	event->size--;
-	return 0;
+	return event;
+}
+
+//Látogató törlése az eseményről
+struct Event* deleteVisitorFromEventById(Event* event, int visitorId)
+{
+	int i, l = 0;
+	Visitor**  _visitorArray = malloc(event -> _realSize * sizeof(Visitor*));
+	for(i = 0; i < event->size; ++i)
+	{
+		if(visitorId != i)
+		{
+			_visitorArray[l] = event->visitorArray[i];
+		}
+		else
+		{
+			l = i-1;
+			freeVisitor(event->visitorArray[i]);
+		}
+		++l;
+	}
+	Visitor** arr = event -> visitorArray;
+	free(arr);
+	event -> visitorArray = _visitorArray;
+	event->size--;
+	return event;
 }
 
 

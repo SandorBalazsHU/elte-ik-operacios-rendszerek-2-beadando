@@ -14,13 +14,20 @@
 #include "./Visitor.h"
 
 //Új látogató létrehozása
-struct Visitor* newVisitor(char* name, char* mail, time_t date)
+struct Visitor* newVisitor(char* name, char*email, time_t date)
 {
     struct Visitor* _this = malloc(sizeof(struct Visitor));
     strcpy(_this->name, name);
-    strcpy(_this->email, mail);
+    strcpy(_this->email, email);
     _this->date=date;
     return _this;
+}
+
+struct Visitor* modifyVisitor(Visitor* visitor, char* name, char* email)
+{
+    strcpy(visitor->name, name);
+    strcpy(visitor->email, email);
+    return visitor;
 }
 
 //A Visitor típus destruktora

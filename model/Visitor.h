@@ -41,6 +41,8 @@
     //Új látogató létrehozása
     struct Visitor* newVisitor(char*, char*, time_t);
 
+    struct Visitor* modifyVisitor(Visitor*, char*, char*);
+
     //A Visitor típus destruktora
     void freeVisitor(Visitor*);
 

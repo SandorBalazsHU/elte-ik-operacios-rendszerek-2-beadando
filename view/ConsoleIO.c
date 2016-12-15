@@ -158,7 +158,7 @@ void printEvents(Events* events)
 		
 		for(i=0; i<events->size; ++i)
 		{
-			Event* tmpEvent = events->eventsArray[i];
+			Event* tmpEvent = getEventFromEventsById(events, i);
 			char nameSpacer[fullNameWidth-2-strlen(tmpEvent->name)+2];
 			spacerGenerator(nameSpacer, ' ', fullNameWidth-2-strlen(tmpEvent->name)+2);
 			char eventSizeSpacer[17-numPlaces(tmpEvent->size)+2];
@@ -175,22 +175,22 @@ void printEvents(Events* events)
 	}
 }
 
-void printVisitors(Events* events, int eventID)
+void printVisitors(Events* events, int eventId)
 {
 	int i;
 	int fullWidth = 0;
 	int fullNameWidth = 0;
 	int fullEmailWidth = 0;
 
-	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	for(i=0; i<events->eventsArray[eventId]->size; ++i)
 	{
-		int len = _strlenForUnicode(events->eventsArray[eventID]->visitorArray[i]->name);
+		int len = _strlenForUnicode(events->eventsArray[eventId]->visitorArray[i]->name);
 		if(len>fullNameWidth) fullNameWidth = len;
 	}
 
-	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	for(i=0; i<events->eventsArray[eventId]->size; ++i)
 	{
-		int len = _strlenForUnicode(events->eventsArray[eventID]->visitorArray[i]->email);
+		int len = _strlenForUnicode(events->eventsArray[eventId]->visitorArray[i]->email);
 		if(len>fullEmailWidth) fullEmailWidth = len;
 	}
 
@@ -205,11 +205,11 @@ void printVisitors(Events* events, int eventID)
 	char emailLine[fullEmailWidth+4];
 	spacerGenerator(emailLine, '-', (int) (fullEmailWidth+2));
 	
-	printf("%s%s+%s A/Az [%s] eseményre jelentkezett vendégek: \n", spacer, FontGreen, ColorClear, events->eventsArray[eventID]->name);
-	printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s--------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
-	for(i=0; i<events->eventsArray[eventID]->size; ++i)
+	printf("%s%s+%s A/Az [%s] eseményre jelentkezett vendégek: \n", spacer, FontGreen, ColorClear, events->eventsArray[eventId]->name);
+	printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s---------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
+	for(i=0; i<events->eventsArray[eventId]->size; ++i)
 	{
-		Visitor* tmpVisitor = events->eventsArray[eventID]->visitorArray[i];
+		Visitor* tmpVisitor =  getVisitorFromEventById(getEventFromEventsById(events, eventId), i);
 
 		char nameSpacer[fullNameWidth-strlen(tmpVisitor->name)+2];
 		spacerGenerator(nameSpacer, ' ', fullNameWidth-strlen(tmpVisitor->name));
@@ -221,8 +221,41 @@ void printVisitors(Events* events, int eventID)
 		printf("%s| %i%s| %s%s | %s%s | ", spacer, i+1, idSpacer, tmpVisitor->name, nameSpacer, tmpVisitor->email, emailSpacer);
 		datePrintOut(tmpVisitor->date);
 		printf(" |\n");
-		printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s--------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
+		printf("%s%s+%s-----%s+%s%s%s+%s%s%s+%s---------------------%s+%s\n", spacer, FontGreen, ColorClear, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
 	}
+}
+
+void printVisitor(Visitor* visitor)
+{
+	int i;
+	int fullWidth = 0;
+	int fullNameWidth = 0;
+	int fullEmailWidth = 0;
+
+	fullNameWidth = _strlenForUnicode(visitor->name);
+	fullEmailWidth = _strlenForUnicode(visitor->email);
+	fullWidth = (int) fullNameWidth + fullEmailWidth + 30;
+
+	int spacerWidth = (int) (getConsoleWindowWidth() - fullWidth)/2;
+	char spacer[spacerWidth+2];
+	spacerGenerator(spacer, ' ', spacerWidth);
+	char nameLine[fullNameWidth+4];
+	spacerGenerator(nameLine, '-', (int) (fullNameWidth+2));
+	char emailLine[fullEmailWidth+4];
+	spacerGenerator(emailLine, '-', (int) (fullEmailWidth+2));
+	
+	printf("%s%s+%s A/Az [%s] látogató adatai: \n", spacer, FontGreen, ColorClear, visitor->name);
+	printf("%s%s+%s%s%s+%s%s%s+%s---------------------%s+%s\n", spacer, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
+
+	char nameSpacer[fullNameWidth-strlen(visitor->name)+2];
+	spacerGenerator(nameSpacer, ' ', fullNameWidth-strlen(visitor->name));
+	char emailSpacer[fullEmailWidth-strlen(visitor->email)+2];
+	spacerGenerator(emailSpacer, ' ', fullEmailWidth-strlen(visitor->email));
+	
+	printf("%s| %s%s | %s%s | ", spacer, visitor->name, nameSpacer, visitor->email, emailSpacer);
+	datePrintOut(visitor->date);
+	printf(" |\n");
+	printf("%s%s+%s%s%s+%s%s%s+%s---------------------%s+%s\n", spacer, FontGreen, ColorClear,  nameLine, FontGreen, ColorClear, emailLine, FontGreen, ColorClear, FontGreen, ColorClear);
 }
 
 /*

@@ -51,7 +51,7 @@ void view2(Events* events)
         readFromConsole(name, "Név");
         char email[100];
         readFromConsole(email, "E-mail");
-        int eventID = readIntFromConsole("A választott rendezvény száma", events->size);
+        int eventID = readIntFromConsole("A választott rendezvény száma", events->size)-1;
 
         char* subMenu[1];
         subMenu[0] = "Mentés              ";
@@ -63,7 +63,7 @@ void view2(Events* events)
         switch(selectedMainMenuitem)
         {
             case '1' :
-                addVisitorToEvent(getEventFromEventsById(events, eventID-1), newVisitor(name, email, getDate()));
+                addVisitorToEvent(getEventFromEventsById(events, eventID), newVisitor(name, email, getDate()));
                 eventsWriterForBinFiles(events);
                 printMessage("Jelentkezésed elmentettük!");
                 sleep(sleepTime);
@@ -121,23 +121,8 @@ void view4(Events* events)
         printEvents(events);
 
         _clearInputBuffer();
-        int eventId = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)", events->size);
-
-        char* subMenu[1];
-        subMenu[0] = "Listáz              ";
-        subMenu[1] = "Vissza              ";
-        printMenu(subMenu, 2);
-
-        char selectedMainMenuitem = menuGenerator("12");
-
-        switch(selectedMainMenuitem)
-        {
-            case '1' : view7(events, eventId);
-            break;
-            case '2' : view3(events);
-            break;
-            default : errorMessage("Hiba a menüben!\n" );
-        }
+        int eventId = readIntFromConsole("Mely rendezvény vendéglistályát szerené látni (ID)", events->size)-1;
+        view7(events, eventId);
     }
     else
     {
@@ -185,7 +170,7 @@ void view6(Events* events)
         printEvents(events);
 
         _clearInputBuffer();
-        int id = readIntFromConsole("A törölni kívánt rendezvény ID-ja", events->size);
+        int id = readIntFromConsole("A törölni kívánt rendezvény ID-ja", events->size)-1;
 
         char* subMenu[1];
         subMenu[0] = "Törlés              ";
@@ -197,7 +182,7 @@ void view6(Events* events)
         switch(selectedMainMenuitem)
         {
             case '1' : 
-                eventsWriterForBinFiles(deleteEventFromEventsById(events, id-1));
+                eventsWriterForBinFiles(deleteEventFromEventsById(events, id));
                 printMessage("A kiválasztott rendezvényt törtöltük!");
                 sleep(sleepTime);
                 view3(events);
@@ -220,9 +205,9 @@ void view7(Events* events, int eventId)
     clearScrean();
     printIntro();
     printHeader("Vendéglista");
-    if(getEventFromEventsById(events, eventId-1)->size > 0)
+    if(getEventFromEventsById(events, eventId)->size > 0)
     {
-        printVisitors(events, eventId-1);
+        printVisitors(events, eventId);
 
         char* subMenu[4];
         subMenu[0] = "Vendégmódosítás     ";
@@ -234,9 +219,9 @@ void view7(Events* events, int eventId)
 
         switch(selectedMainMenuitem)
         {
-            case '1' : view8(events);
+            case '1' : view8(events, eventId);
             break;
-            case '2' : view9(events);
+            case '2' : view10(events, eventId);
             break;
             case '3' : view3(events);
             break;
@@ -251,12 +236,83 @@ void view7(Events* events, int eventId)
     }
 }
 
-void view8(Events* events)
+void view8(Events* events, int eventId)
 {
+    clearScrean();
+    printIntro();
+    printHeader("Vendégmódosítás");
+    printVisitors(events, eventId);
+
+    _clearInputBuffer();
+    int visitorId = readIntFromConsole("A módosítani kívánt vendég ID-ja", getEventFromEventsById(events, eventId)->size)-1;
+    view9(events, eventId, visitorId);
+}
+
+void view9(Events* events, int eventId, int visitorId)
+{
+    clearScrean();
+    printIntro();
+    printHeader("Vendégmódosítás");
+    printEvents(events);
+    printVisitor(getVisitorFromEventById(getEventFromEventsById(events, eventId), visitorId));
+
+    _clearInputBuffer();
+    char name[100];
+    readFromConsole(name, "Név");
+    char email[100];
+    readFromConsole(email, "Email");
+
+    char* subMenu[1];
+    subMenu[0] = "Mentés              ";
+    subMenu[1] = "Mégse               ";
+    printMenu(subMenu, 2);
+
+    char selectedMainMenuitem = menuGenerator("12");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' :
+            modifyVisitor(getVisitorFromEventById(getEventFromEventsById(events, eventId), visitorId), name, email);
+            eventsWriterForBinFiles(events);
+            printMessage("A módosítást elmentettük!");
+            sleep(sleepTime);
+            view7(events, eventId);
+        break;
+        case '2' : view7(events, eventId);
+        break;
+        default : errorMessage("Hiba a menüben!\n" );
+    }
 
 }
 
-void view9(Events* events)
+void view10(Events* events, int eventId)
 {
+    clearScrean();
+    printIntro();
+    printHeader("Vendégtörlés");
+    printVisitors(events, eventId);
 
+    _clearInputBuffer();
+    int visitorId = readIntFromConsole("A törölni kívánt vendég ID-ja", events->size)-1;
+
+    char* subMenu[1];
+    subMenu[0] = "Törlés              ";
+    subMenu[1] = "Mégse               ";
+    printMenu(subMenu, 2);
+
+    char selectedMainMenuitem = menuGenerator("12");
+
+    switch(selectedMainMenuitem)
+    {
+        case '1' : 
+            deleteVisitorFromEventById(getEventFromEventsById(events, eventId), (int) (visitorId));
+            eventsWriterForBinFiles(events);
+            printMessage("A kiválasztott rendezvényt törtöltük!");
+            sleep(sleepTime);
+            view7(events, eventId);
+        break;
+        case '2' : view7(events, eventId);
+        break;
+        default : errorMessage("Hiba a menüben!\n" );
+    }
 }

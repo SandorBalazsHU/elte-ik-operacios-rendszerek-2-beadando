@@ -63,6 +63,7 @@
     void printEvents(Events* event);
 
     void printVisitors(Events*, int);
+    void printVisitor(Visitor*);
 
     //Állandó karaktersor generátor
     void spacerGenerator(char*, char, int);

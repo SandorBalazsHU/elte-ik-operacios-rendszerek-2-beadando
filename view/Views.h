@@ -20,7 +20,7 @@
     void view5(Events*);
     void view6(Events*);
     void view7(Events*, int);
-    void view8(Events*);
-    void view9(Events*);
-
+    void view8(Events*, int);
+    void view9(Events*, int, int);
+    void view10(Events*, int);
 #endif
