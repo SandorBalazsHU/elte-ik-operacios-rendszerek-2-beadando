@@ -124,3 +124,11 @@ Menürendszer:
         |-SUB MENU:+
                    |->-Törlés    --> VIEW7
                    |->-Vissza    --> VIEW3
+    Szimuláció ->- FROM: VIEW1
+    11.) +-VIEW11
+        |-CLEAR
+        |-INTRO
+        |-HEADER
+        |-LIST EVENTS
+        |-SUB MENU:+
+                   |->-Vissza    --> VIEW1

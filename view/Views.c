@@ -2,7 +2,7 @@
     Tárgy: Elte IK Operációs rendszerek 1. Beadandó
     Készítette: Sándor Balázs - AZA6NL
     Leadás: 2016.11.07
-	Git: https://github.com/SandorBalazsHU/elte-ik-os-1
+	Git: https://github.com/SandorBalazsHU/elte-ik-os-king-of-stands
 
     A menünézetek megvalósításai.
     A nézetek részletezését lásd a Documentation.txt-ben.
@@ -11,6 +11,7 @@
 #include "Views.h"
 #include "ConsoleIO.h"
 #include "../model/Events.h"
+#include "../simulation/Simulation.h"
 
 int view1(Events* events)
 {
@@ -21,10 +22,11 @@ int view1(Events* events)
     char* mainMenu[3];
     mainMenu[0] = "Jelentkezés         ";
     mainMenu[1] = "Adminisztráció      ";
-    mainMenu[2] = "Kilépés             ";
-    printMenu(mainMenu, 3);
+    mainMenu[2] = "Szimuláció          ";
+    mainMenu[3] = "Kilépés             ";
+    printMenu(mainMenu, 4);
 
-    char selectedMainMenuitem = menuGenerator("123");
+    char selectedMainMenuitem = menuGenerator("1234");
 
     switch(selectedMainMenuitem)
     {
@@ -314,5 +316,35 @@ void view10(Events* events, int eventId)
         case '2' : view7(events, eventId);
         break;
         default : errorMessage("Hiba a menüben!\n" );
+    }
+}
+void view11(Events* events)
+{
+    clearScrean();
+    printIntro();
+    if(events->size > 0)
+    {
+        printEvents(events);
+
+        simulation(events);
+
+        char* mainMenu[3];
+        mainMenu[0] = "Vissza              ";
+        printMenu(mainMenu, 1);
+
+        char selectedMainMenuitem = menuGenerator("1");
+
+        switch(selectedMainMenuitem)
+        {
+            case '1' : view1(events);
+            break;
+            default : errorMessage("Hiba a menüben!\n" );
+        }
+    }
+    else
+    {
+        printMessage("Nincsenek résztvevők az eseményen!");
+        sleep(sleepTime);
+        view3(events);
     }
 }

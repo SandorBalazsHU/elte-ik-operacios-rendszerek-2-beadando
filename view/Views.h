@@ -23,4 +23,5 @@
     void view8(Events*, int);
     void view9(Events*, int, int);
     void view10(Events*, int);
+    void view11(Events*);
 #endif
