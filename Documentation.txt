@@ -5,21 +5,16 @@ Git: https://github.com/SandorBalazsHU/elte-ik-os-1
 A projekt alapvető dokumentációja
 
 A feladatkiírás felbontása funkcionalitásokra:
-    + Készítsen C programot
-    + amely rendszerhívások alkalmazásával megoldja a következő feladatot:
-
-    + Egy kiállításokat, rendezvényeket szervező társaság a "King of Stands", elektronikus látogatói nyilvántartást készített.
-
-    + Az alkalmazás adjon lehetőséget vendég jelentkezéshez.
-    + A látogatók a nyilvántartásba jelentkezéskor
-        - megadják nevüket, mail címüket, a rendezvény azonosító számát!
-        - Az elektronikus rendszer a jelentkezés nyugtázásaként visszaadja, hogy hányadik vendégként történt meg a regisztráció!
-        - A jelentkezőknél a korábbi adatok mellett rögzítsük automatikusan a jelentkezési időt(rendszeridő) is(ezt nem kell bekérni)! 
-    + Az alkalmazás adjon lehetőséget a jelentkezettek listázásához
-    + egy vendég adatainak módosításához
-    + vendég törléséhez.
-    + Legyen lehetőségünk egy új rendezvény indításához
-    + egy rendezvény összes adatának törléséhez!
+A "King of Stands" rendezvény szervező társaság, amint a rendezvény ideje eljön, megbízza egy partnerét(gyermekét) az esemény lebonyolítására.
+A gyermekfolyamat indulása után csővezetéken megkapja, hogy hol kerül a rendezvény lebonyolításra!
+A helyszínre utazik, majd visszajelzi (jelzést küld vissza) a központnak, hogy a megadott helyszinen van, várja a résztvevőket,
+kész a rendezvény lebonyolítására.
+Ezután a rendezvényszervező csővezetéken elküldi a helyszínen tartózkodó partnernek, hogy kik a résztvevők.
+Ezt a partner képernyőre írja, majd várja a vendégeket és levezényli a rendezvényt!
+A rendezvény végén jelentést küld vissza, amiben tájékoztatja a főszervezőt,
+hogy mennyire sikeres volt a rendezvény (véletlenszám), illetve a jelentkezettek közül végül is ki nem érkezett meg!
+(Minden résztvevő 10% valószínűséggel nem érkezik meg!)
+Miután egy esemény lebonyolításra került, "King of Stands" újra megvizsgálja, melyik rendezvény a következő! 
 
 Menürendszer: 
     Főképernyő ->- FROM: \
