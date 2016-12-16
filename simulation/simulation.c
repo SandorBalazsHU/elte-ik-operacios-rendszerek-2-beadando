@@ -100,7 +100,8 @@ int simulation(Events* events)
 		{
 			read(pipeDown[0], pipeBuffer, sizeof(pipeBuffer));
 			simulationMessage(pipeBuffer);
-			//write(pipeUp[1], pipeBuffer, sizeof(pipeBuffer));
+			if((1+rand()%100) < 90) pipeBuffer[0] = '\0';
+			write(pipeUp[1], pipeBuffer, sizeof(pipeBuffer));
 		}
 		close(pipeDown[0]);
 		close(pipeUp[1]);
@@ -141,6 +142,12 @@ int simulation(Events* events)
 		read(pipeUp[0], pipeBuffer, sizeof(pipeBuffer));
 		simulationMessage("Az esemény sikeressége:");
 		simulationMessage(pipeBuffer);
+		simulationMessage("A meg nem jelent vendégek:");
+		for(i=0; i<event->size; i++)
+		{
+			read(pipeUp[0], pipeBuffer, sizeof(pipeBuffer));
+			if(pipeBuffer[0] != '\0') simulationMessage(pipeBuffer);
+		}
 
 
 		close(pipeDown[1]);
