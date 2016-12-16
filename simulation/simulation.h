@@ -10,10 +10,10 @@
 #define SIMULATION_H
 
     #include "../model/Events.h"
-    
+
     void _stringSerializer(char*, char*);
     void _signalHandler(int);
     void _sendSignal();
-    int simulation(Events*);
+    int simulation(Events*, int);
 
 #endif

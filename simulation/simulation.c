@@ -29,7 +29,7 @@ void _sendSignal()
 	kill(getpid(), SIGTERM);
 }
 
-int simulation(Events* events)
+int simulation(Events* events, int eventID)
 {
     printMessage("A szimuláció Elkezdődött!");
 	pid_t parentPid = getpid();
@@ -91,7 +91,7 @@ int simulation(Events* events)
 		write(pipeUp[1], pipeBuffer, sizeof(pipeBuffer));
 
 		//A résztvevőlista fogadása a leszállócsőből
-		// és a meg nem érkezettek visszaküldése a felszálló csövön.
+		//és a meg nem érkezettek visszaküldése a felszálló csövön.
 		simulationMessage("A rendezvény résztvevői: ");
 		read(pipeDown[0], pipeBuffer, sizeof(pipeBuffer));
 		char *garbage = NULL;
@@ -115,7 +115,7 @@ int simulation(Events* events)
 	else 
 	{
 		//Szülő
-		Event* event = getEventFromEventsById(events, 0);
+		Event* event = getEventFromEventsById(events, eventID);
 		close(pipeDown[0]);
 		close(pipeUp[1]);
 		
@@ -149,14 +149,12 @@ int simulation(Events* events)
 			if(pipeBuffer[0] != '\0') simulationMessage(pipeBuffer);
 		}
 
-
 		close(pipeDown[1]);
 		close(pipeUp[0]);
 		fflush(NULL);
 
 		//Bevár
 		wait();
-
 		simulationStateMessage("KOS(Szülő)", parentPid, "Leáll!");
         printMessage("A szimuláció végetért!");
 	}

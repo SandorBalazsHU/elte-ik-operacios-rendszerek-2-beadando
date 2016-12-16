@@ -328,7 +328,7 @@ void view11(Events* events)
     {
         printEvents(events);
 
-        simulation(events);
+        int i; for(i=0; i<events->size; i++) simulation(events, i);
 
         char* mainMenu[3];
         mainMenu[0] = "Vissza              ";
