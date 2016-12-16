@@ -82,4 +82,7 @@
 
     int readIntFromConsole(char*, int);
 
+    void printMessage(char*);
+
+    void simulationStateMessage(char*, int, char*);
 #endif

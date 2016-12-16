@@ -34,7 +34,9 @@ int view1(Events* events)
         break;
         case '2' : view3(events);
         break;
-        case '3' : return 0;
+        case '3' : view11(events);
+        break;
+        case '4' : return 0;
         break;
         default : errorMessage("Hiba a menüben!\n" );
     }
@@ -340,6 +342,7 @@ void view11(Events* events)
             break;
             default : errorMessage("Hiba a menüben!\n" );
         }
+        _clearInputBuffer();
     }
     else
     {

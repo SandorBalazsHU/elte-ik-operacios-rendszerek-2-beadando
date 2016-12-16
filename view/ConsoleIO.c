@@ -72,13 +72,13 @@ void printHeader(char* headerText)
 	printf("\n");
 }
 
-void printMessage(char* headerText)
+void printMessage(char* message)
 {
 	printf("\n");
-	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(headerText)/2) - 4 - 1;
+	int position = (int) (getConsoleWindowWidth()/2) - (_strlenForUnicode(message)/2) - 4 - 1;
 	char spacer[position+2];
 	spacerGenerator(spacer, ' ', position);
-	printf("%s<-|%s%s %s %s|->\n", spacer, FontBlack, FontBackYellow, headerText, ColorClear);
+	printf("%s<-|%s%s %s %s|->\n", spacer, FontBlack, FontBackYellow, message, ColorClear);
 	printf("\n");
 }
 
@@ -291,6 +291,13 @@ void errorMessage(char* errorMessageText)
 {
 	printf("\n");
 	printf("+ %s%sHiba%s: %s\n", FontWhite, FontBackRed, ColorClear, errorMessageText);
+	printf("\n");
+}
+
+void simulationStateMessage(char* name, int pid, char* message)
+{
+	printf("\n");
+	printf("+ %s%s[%s]>%i:%s %s\n", FontBlack, FontBackYellow, name, pid, ColorClear, message);
 	printf("\n");
 }
 

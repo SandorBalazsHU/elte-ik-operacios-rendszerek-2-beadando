@@ -6,11 +6,11 @@
 
     A szimuláció.
 */
-#ifndef VIEWS_H
-#define VIEWS_H
+#ifndef SIMULATION_H
+#define SIMULATION_H
 
     #include "../model/Events.h"
 
-    void simulation(Events*);
+    int simulation(Events*);
 
 #endif

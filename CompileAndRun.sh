@@ -8,7 +8,7 @@
 
 clear
 rm Kos
-gcc -O3 ./Kos.c  view/* model/* controller/* tests/* -O3 -o Kos
+gcc -O3 ./Kos.c  view/* model/* controller/* tests/* simulation/* -O3 -o Kos
 if [ $? -ne 0 ]; then
     echo "Fordítás sikertelen!";
 else
