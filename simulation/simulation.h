@@ -11,6 +11,8 @@
 
     #include "../model/Events.h"
 
+    void _signalHandler(int);
+    void _sendSignal();
     int simulation(Events*);
 
 #endif

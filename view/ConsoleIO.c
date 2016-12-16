@@ -294,11 +294,14 @@ void errorMessage(char* errorMessageText)
 	printf("\n");
 }
 
+void simulationMessage(char* message)
+{
+	printf("     %s+%s %s\n", FontGreen, ColorClear, message);
+}
+
 void simulationStateMessage(char* name, int pid, char* message)
 {
-	printf("\n");
 	printf("+ %s%s[%s]>%i:%s %s\n", FontBlack, FontBackYellow, name, pid, ColorClear, message);
-	printf("\n");
 }
 
 char* readFromConsole(char* inputString, char* label)

@@ -85,4 +85,6 @@
     void printMessage(char*);
 
     void simulationStateMessage(char*, int, char*);
+    
+    void simulationMessage(char*);
 #endif
