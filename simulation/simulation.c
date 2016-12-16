@@ -14,6 +14,7 @@
 
 #include "./Simulation.h"
 #include "../model/Events.h"
+#include "../model/Event.h"
 #include "../view/ConsoleIO.h"
 
 void _signalHandler(int signumber)
@@ -37,7 +38,7 @@ int simulation(Events* events)
 	//Pipe
     int communicationPipe[2];
 	pid_t childPid;
-	char pipeBuffer[100];
+	char pipeBuffer[5];
 	if (pipe(communicationPipe) == -1) 
 	{
 		errorMessage("Hiba a pipe nyitaskor!");
@@ -63,13 +64,24 @@ int simulation(Events* events)
 		simulationStateMessage("Partner(gyerek)", myChildPid, "Fut!");
 
 		sleep(3);
-
 		//Pipe - 1
 		close(communicationPipe[1]);
 		read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
 		simulationStateMessage("Partner(gyerek)", myChildPid, "Az olvasott üzenet:");
 		simulationMessage("A rendezvény helyszíne: ");
 		simulationMessage(pipeBuffer);
+
+		//Pipe - 2
+		simulationMessage("A rendezvény résztvevői: ");
+		read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
+		simulationStateMessage("Partner(gyerek)", myChildPid, pipeBuffer);
+		char *garbage = NULL;
+		int eventSize = strtol(pipeBuffer, &garbage, 0);
+		int i; for(i=0; i<3; i++)
+		{
+			read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
+			simulationMessage(pipeBuffer);
+		}
 		close(communicationPipe[0]);
 
 		//Signal
@@ -81,17 +93,41 @@ int simulation(Events* events)
 	else 
 	{
 		//Szülő
+		Event* event = getEventFromEventsById(events, 0);
+
 		//Pipe - 1
 		close(communicationPipe[0]);
 		char* eventName = getEventFromEventsById(events, 0)->name;
-		write(communicationPipe[1], eventName, strlen(eventName));
+		_stringSerializer(eventName, pipeBuffer);
+		write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
+		fflush(NULL);
+
+		//Pipe - 2
+		char eventSizeToStringTmp[15];
+		sprintf(eventSizeToStringTmp, "%d", event->size);
+		simulationStateMessage("KOS(Szülő)", parentPid, eventSizeToStringTmp);
+		_stringSerializer(eventSizeToStringTmp, pipeBuffer);
+		write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
+
+		int i; for(i=0; i<event->size; i++)
+		{
+			char* visitorName = getVisitorFromEventById(event, i)->name;
+			_stringSerializer(visitorName, pipeBuffer);
+			write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
+		}
+
 		close(communicationPipe[1]);
 		fflush(NULL);
 
 		//Bevár
 		wait();
-		
+
 		simulationStateMessage("KOS(Szülő)", parentPid, "Leáll!");
         printMessage("A szimuláció végetért!");
 	}
+}
+
+void _stringSerializer(char* in, char* buffer)
+{
+	strcpy(buffer, in);
 }
