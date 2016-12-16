@@ -34,12 +34,21 @@ int simulation(Events* events)
     printMessage("A szimuláció Elkezdődött!");
 	pid_t parentPid = getpid();
 	simulationStateMessage("KOS(Szülő)", parentPid, "Fut!");
-
-	//Pipe
-    int communicationPipe[2];
 	pid_t childPid;
-	char pipeBuffer[5];
-	if (pipe(communicationPipe) == -1) 
+
+	//Pipes
+	char pipeBuffer[30];
+	//pipeDown
+    int pipeDown[2];
+	if (pipe(pipeDown) == -1) 
+	{
+		errorMessage("Hiba a pipe nyitaskor!");
+		return 1;
+	}
+
+	//pipeUp
+    int pipeUp[2];
+	if (pipe(pipeUp) == -1) 
 	{
 		errorMessage("Hiba a pipe nyitaskor!");
 		return 1;
@@ -64,25 +73,37 @@ int simulation(Events* events)
 		simulationStateMessage("Partner(gyerek)", myChildPid, "Fut!");
 
 		sleep(3);
-		//Pipe - 1
-		close(communicationPipe[1]);
-		read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
+		close(pipeDown[1]);
+		close(pipeUp[0]);
+
+		//A rendezvény helyszínének fogadása a leszálló csőből.
+		read(pipeDown[0], pipeBuffer, sizeof(pipeBuffer));
 		simulationStateMessage("Partner(gyerek)", myChildPid, "Az olvasott üzenet:");
 		simulationMessage("A rendezvény helyszíne: ");
 		simulationMessage(pipeBuffer);
 
-		//Pipe - 2
+		//A rendezvény sikerességénekelküldése
+		srand(time(NULL));
+		int eventRate = 1+rand()%100;
+		char eventRateStringTmp[15];
+		sprintf(eventRateStringTmp, "%d", eventRate);
+		_stringSerializer(eventRateStringTmp, pipeBuffer);
+		write(pipeUp[1], pipeBuffer, sizeof(pipeBuffer));
+
+		//A résztvevőlista fogadása a leszállócsőből
+		// és a meg nem érkezettek visszaküldése a felszálló csövön.
 		simulationMessage("A rendezvény résztvevői: ");
-		read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
-		simulationStateMessage("Partner(gyerek)", myChildPid, pipeBuffer);
+		read(pipeDown[0], pipeBuffer, sizeof(pipeBuffer));
 		char *garbage = NULL;
 		int eventSize = strtol(pipeBuffer, &garbage, 0);
-		int i; for(i=0; i<3; i++)
+		int i; for(i=0; i<eventSize; i++)
 		{
-			read(communicationPipe[0], pipeBuffer, sizeof(pipeBuffer));
+			read(pipeDown[0], pipeBuffer, sizeof(pipeBuffer));
 			simulationMessage(pipeBuffer);
+			//write(pipeUp[1], pipeBuffer, sizeof(pipeBuffer));
 		}
-		close(communicationPipe[0]);
+		close(pipeDown[0]);
+		close(pipeUp[1]);
 
 		//Signal
 		_sendSignal();
@@ -94,29 +115,36 @@ int simulation(Events* events)
 	{
 		//Szülő
 		Event* event = getEventFromEventsById(events, 0);
-
-		//Pipe - 1
-		close(communicationPipe[0]);
+		close(pipeDown[0]);
+		close(pipeUp[1]);
+		
+		//A helyszín küldése a leszállócsőbe
 		char* eventName = getEventFromEventsById(events, 0)->name;
 		_stringSerializer(eventName, pipeBuffer);
-		write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
+		write(pipeDown[1], pipeBuffer, sizeof(pipeBuffer));
 		fflush(NULL);
 
-		//Pipe - 2
+		//A résztvevők küldése a leszállócsőbe
 		char eventSizeToStringTmp[15];
 		sprintf(eventSizeToStringTmp, "%d", event->size);
-		simulationStateMessage("KOS(Szülő)", parentPid, eventSizeToStringTmp);
 		_stringSerializer(eventSizeToStringTmp, pipeBuffer);
-		write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
-
+		write(pipeDown[1], pipeBuffer, sizeof(pipeBuffer));
 		int i; for(i=0; i<event->size; i++)
 		{
 			char* visitorName = getVisitorFromEventById(event, i)->name;
 			_stringSerializer(visitorName, pipeBuffer);
-			write(communicationPipe[1], pipeBuffer, sizeof(pipeBuffer));
+			write(pipeDown[1], pipeBuffer, sizeof(pipeBuffer));
 		}
 
-		close(communicationPipe[1]);
+		sleep(3);
+		//A sikeresség fogadása a felszálócsőből
+		read(pipeUp[0], pipeBuffer, sizeof(pipeBuffer));
+		simulationMessage("Az esemény sikeressége:");
+		simulationMessage(pipeBuffer);
+
+
+		close(pipeDown[1]);
+		close(pipeUp[0]);
 		fflush(NULL);
 
 		//Bevár
